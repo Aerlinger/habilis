@@ -1,0 +1,21 @@
+{
+  "name": "demo-run-command",
+  "version": "0.0.1",
+  "description": "A package showing run command with node child_process",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "build": false,
+  "main-menu": {
+    "Examples/Run Command": {
+      "message": "demo-run-command:open"
+    }
+  },
+  "panel": {
+    "main": "panel/panel.html",
+    "ui": "polymer",
+    "type": "dockable",
+    "title": "Demo: Run Command",
+    "width": 800,
+    "height": 600
+  }
+}

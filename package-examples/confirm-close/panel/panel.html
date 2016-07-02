@@ -1,0 +1,95 @@
+<dom-module id="demo-confirm-close">
+  <template>
+    <style>
+      :host {
+        @apply(--layout-fit);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h2 {
+        text-align: center;
+        color: #aaa;
+      }
+    </style>
+
+    <h2 class="layout vertical center">
+      Close or Refresh current page will show confirm message.
+    </h2>
+  </template>
+
+  <script>
+    (() => {
+      'use strict';
+
+      Editor.polymerPanel( 'demo-confirm-close', {
+        // TODO: I should add panel:close message for close
+
+        ready () {
+
+          window.addEventListener('beforeunload', event => {
+            let stopUnload = false;
+
+            let res = this._confirmClose();
+            switch ( res ) {
+            // save
+            case 0:
+              Editor.log('Save');
+              stopUnload = false;
+              break;
+
+            // cancel
+            case 1:
+              Editor.log('Cancel');
+              stopUnload = true;
+              break;
+
+            // don't save
+            case 2:
+              Editor.log('Don\'t Save');
+              stopUnload = false;
+              break;
+            }
+
+            if ( stopUnload ) {
+              event.returnValue = true;
+            }
+          });
+
+          // You can also do it by:
+          // window.onbeforeunload = event => {
+          //   let res = this._confirmClose();
+          //   switch ( res ) {
+          //   // save
+          //   case 0:
+          //     Editor.log('Save');
+          //     return true;
+
+          //   // cancel
+          //   case 1:
+          //     Editor.log('Cancel');
+          //     return false;
+
+          //   // don't save
+          //   case 2:
+          //     Editor.log('Don\'t Save');
+          //     return true;
+          //   }
+          // };
+        },
+
+        _confirmClose () {
+          return Editor.Dialog.messageBox({
+            type: 'warning',
+            buttons: ['Save', 'Cancel', 'Don\'t Save'],
+            title: 'Save Confirm',
+            message: 'Something has changed, do you want to save it?',
+            detail: 'Your changes will be lost if you close this item without saving.',
+          });
+        },
+      });
+    })();
+  </script>
+</dom-module>

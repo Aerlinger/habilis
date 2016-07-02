@@ -1,0 +1,24 @@
+{
+  "name": "demo-lifecycle",
+  "version": "0.0.1",
+  "description": "Lifecycle Demo",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "main-menu": {
+    "Examples/Lifecycle": {
+      "message": "demo-lifecycle:open"
+    }
+  },
+  "panel": {
+    "main": "panel/lifecycle.html",
+    "ui": "polymer",
+    "type": "dockable",
+    "title": "Lifecycle",
+    "width": 800,
+    "height": 600,
+    "profiles": {
+      "local": {
+      }
+    }
+  }
+}

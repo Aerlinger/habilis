@@ -1,0 +1,21 @@
+{
+  "name": "demo-list-view",
+  "version": "0.0.3",
+  "description": "A package displaying list items in a scrollable panel",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "build": false,
+  "main-menu": {
+    "Examples/List View": {
+      "message": "demo-list-view:open"
+    }
+  },
+  "panel": {
+    "main": "panel/panel.html",
+    "ui": "polymer",
+    "type": "dockable",
+    "title": "Demo: List View",
+    "width": 800,
+    "height": 600
+  }
+}

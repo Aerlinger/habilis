@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Main Window</title>
+    <meta charset="utf-8">
+
+    <style>
+      #mainDock {
+        position: relative;
+      }
+      h2 {
+          margin: auto;
+      }
+      h2 span {
+          color: #090;
+      }
+    </style>
+    <script src="app://bower_components/pace/pace.js"></script>
+    <link href="app://bower_components/pace/themes/red/pace-theme-center-simple.css" rel="stylesheet">
+  </head>
+
+  <body class="layout vertical">
+    <h2>Run demos from <span>Main Menu/Examples</span></h2>
+    <main-dock class="flex-1"></main-dock>
+    <script>
+      Pace.once( 'hide', function () {
+          EditorUI.removeLoadingMask();
+      });
+
+      EditorUI.addLoadingMask({
+          background: '#333',
+      });
+    </script>
+  </body>
+</html>

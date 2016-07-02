@@ -1,0 +1,28 @@
+{
+  "name": "demo-selection",
+  "version": "0.0.1",
+  "description": "Selection Demo",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "main-menu": {
+    "Examples/Selection": {
+      "message": "demo-selection:open"
+    }
+  },
+  "panel.1": {
+    "main": "panel/panel1.html",
+    "ui": "polymer",
+    "type": "dockable",
+    "title": "Selection 1",
+    "width": 800,
+    "height": 800
+  },
+  "panel.2": {
+    "main": "panel/panel2.html",
+    "ui": "polymer",
+    "type": "dockable",
+    "title": "Selection 2",
+    "width": 800,
+    "height": 600
+  }
+}
