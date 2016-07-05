@@ -5,27 +5,22 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import config from './webpack.config';
+import config from './webpack.config.development';
 
 const app = express();
 const compiler = webpack(config);
-const PORT = 8080;
+const PORT = 3000;
 
-const webpackDev = webpackDevMiddleware(compiler, {
-  publicPath: `http://localhost:${PORT}/dist/`,
+const wdm = webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath,
   stats: {
     colors: true
-  },
-  hot: true,
-  historyApiFallback: true
+  }
 });
 
-app.use(webpackDev);
-app.use(webpackHotMiddleware(compiler, {
-  log: console.log,
-  path: '/__webpack_hmr',
-  heartbeat: 1000
-}));
+app.use(wdm);
+
+app.use(webpackHotMiddleware(compiler));
 
 const server = app.listen(PORT, 'localhost', err => {
   if (err) {
@@ -38,8 +33,7 @@ const server = app.listen(PORT, 'localhost', err => {
 
 process.on('SIGTERM', () => {
   console.log('Stopping dev server');
-
-  webpackDev.close();
+  wdm.close();
   server.close(() => {
     process.exit(0);
   });
