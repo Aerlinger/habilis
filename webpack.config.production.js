@@ -20,7 +20,6 @@ const config = {
 
     loaders: [
       ...baseConfig.module.loaders,
-
       {
         test: /\.global\.css$/,
         loader: ExtractTextPlugin.extract(
@@ -28,7 +27,6 @@ const config = {
           'css-loader'
         )
       },
-
       {
         test: /^((?!\.global).)*\.css$/,
         loader: ExtractTextPlugin.extract(
