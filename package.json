@@ -16,9 +16,13 @@
     "check-dependencies": "0.11.0",
     "ansi-to-html": "^0.4.1",
     "bootstrap": "^3.3.6",
+    "chokidar": "^1.4.3",
     "cuid": "^1.3.8",
-    "editor-framework": "^0.6.1",
+    "editor-framework": "git://github.com/cocos-creator/editor-framework.git#master",
     "electron-prebuilt": "^1.2.3",
+    "fire-fs": "^0.2.4",
+    "fire-path": "^0.1.9",
+    "fire-url": "^0.1.7",
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.3",
     "lodash": "^4.11",
@@ -92,5 +96,8 @@
     "fireball-packages/ui-kit-preview": "master"
   },
   "bin": {},
-  "main": "main.js"
+  "main": "main.js",
+  "nativeModules": [
+    "chokidar"
+  ]
 }

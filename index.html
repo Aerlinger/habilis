@@ -7,12 +7,15 @@
     #mainDock {
       position: relative;
     }
+
     h2 {
       margin: auto;
     }
+
     h2 span {
       color: #090;
     }
+
     body {
       margin: 3px;
     }
@@ -30,13 +33,13 @@
 <h2>Run demos from <span>Main Menu/Examples</span></h2>
 <ui-main-dock class="flex-1"></ui-main-dock>
 <script>
-  Pace.once( 'hide', function () {
+  Pace.once('hide', function() {
     Editor.UI.removeLoadingMask();
   });
 
   Editor.UI.addLoadingMask({
-                             background: '#333',
-                           });
+    background: '#333',
+  });
 </script>
 </body>
 </html>

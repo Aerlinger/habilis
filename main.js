@@ -1,6 +1,7 @@
 const Editor = require('editor-framework');
 const Path   = require('fire-path');
 
+
 Editor.App.extend({
                     init (opts, cb) {
                       let settingsPath = Path.join(Editor.App.path, '.settings')
