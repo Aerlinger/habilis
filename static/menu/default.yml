@@ -1,0 +1,27 @@
+---
+  -
+    label: "&File"
+    submenu:
+      -
+        label: "&Open"
+        accelerator: "Ctrl+O"
+      -
+        label: "&Close"
+        accelerator: "Ctrl+W"
+  -
+    label: "&View"
+    submenu:
+      -
+        label: "Toggle &Full Screen"
+        accelerator: "F11"
+  -
+    label: "Help"
+    submenu:
+      -
+        label: "Learn More"
+      -
+        label: "Documentation"
+      -
+        label: "Community Discussions"
+      -
+        label: "Search Issues"

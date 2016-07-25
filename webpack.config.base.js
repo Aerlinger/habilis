@@ -9,7 +9,11 @@ export default {
     }, {
       test: /\.json$/,
       loader: 'json-loader'
-    }]
+    }, {
+        test: /\.(yml)|(yaml)$/,
+        loader: 'yaml-loader'
+      }
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
