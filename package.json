@@ -99,6 +99,7 @@
     "yaml-loader": "^0.2.0"
   },
   "dependencies": {
+    "bluebird": "^3.3.4",
     "css-modules-require-hook": "^4.0.0",
     "electron-debug": "^1.0.1",
     "font-awesome": "^4.6.3",
