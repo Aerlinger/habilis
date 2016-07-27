@@ -1,12 +1,9 @@
 import { expect } from 'chai';
-import { spawn } from 'child_process';
 import _ from 'lodash'
-
 import uuid from 'uuid'
 
 import { create, kill, getChildren } from '../../../lib/main/processes'
-import { handle, dispatch } from '../../../lib/main/client'
-import { toPythonArgs, setDefaultEnvVars } from '../../../lib/main/utils/python'
+import { toPythonArgs } from '../../../lib/main/languages/python'
 import { getVariables, getResult, getPythonScriptResults, execute, request, write } from '../../../lib/main/client'
 
 describe("Kernel", function() {
