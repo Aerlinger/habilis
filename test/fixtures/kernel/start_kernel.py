@@ -81,7 +81,8 @@ def kernel(wd=None, verbose=0):
             target_str      = payload.get("target", "client")
             exec_eval       = payload.get("exec_eval", False)
 
-            sys.stdout.write(json.dumps({ "payload": payload }) + '\n')
+            #sys.stdout.write(json.dumps({ "payload": "y" }) + '\n')
+            #print json.dumps({ "payload": line })
 
             if target_str == "manager":
               target = kernel_manager
@@ -102,6 +103,7 @@ def kernel(wd=None, verbose=0):
         try:
             while True:
                 data = kernel_client.get_iopub_msg(timeout=current_timeout)
+
                 if data.get("msg_type") in acceptable_types:
                   sys.stdout.write(json.dumps({"source": "iopub", "result": data}, default=json_serial) + '\n')
                   sys.stdout.flush()
@@ -124,7 +126,7 @@ def kernel(wd=None, verbose=0):
             pass
 
         current_timeout = min(current_timeout * 1.1, current_timeout_max)
-        #sys.stdout.flush()
+        sys.stdout.flush()
 
 if __name__=="__main__":
     wd = None

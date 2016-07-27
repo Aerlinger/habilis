@@ -33,13 +33,15 @@ describe.only("Jupyter Client", function() {
     })
 
     kernelProc.stdout.on('data', function(data) {
-      log("info", data.toString())
+      log("info", "STDOUT", data.toString())
       // console.log( JSON.parse(data.toString()) )
     })
 
+    /*
     kernelProc.stdin.on('data', function(data) {
       console.log('STDIN:', data.toString())
     })
+    */
   })
 
   after((done) => {
@@ -53,10 +55,10 @@ describe.only("Jupyter Client", function() {
   })
 
   it("performs simple eval", function(done) {
-    client.getEval("1 + 1").then(function(result) {
-      console.log(result)
+    client.getEval("113 + 6").then(function(result) {
+      console.log("THE RESULT", result)
 
-      expect(result).to.eql({})
+      expect(result).to.eql(119)
 
       done()
     })
