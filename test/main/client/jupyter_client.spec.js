@@ -11,7 +11,7 @@ import { log, asInternal } from '../../../lib/main/utils/log'
 asInternal(__filename)
 
 
-describe.only("Jupyter Client", function() {
+describe("Jupyter Client", function() {
   this.timeout(5000)
 
   let kernelProc;

@@ -19,7 +19,7 @@ export default class Home extends Component {
     return (
       <div id="main">
         <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
-          <div key="a" _grid={{x: 0, y: 0, w: 6, h: 2}}>
+          <div key="a" data-grid={{x: 0, y: 0, w: 6, h: 20}}>
             <AceEditor
               mode="python"
               theme="github"
@@ -28,8 +28,8 @@ export default class Home extends Component {
               editorProps={{ $blockScrolling: true }}
             />
           </div>
-          <div key="b" _grid={{x: 6, y: 0, w: 6, h: 2}}>
-            <MarkdownPreview mdtext="Some text with **emphasis!**"/>
+          <div key="b" data-grid={{x: 6, y: 0, w: 6, h: 2}}>
+            <MarkdownPreview text="Some text with **emphasis!**"/>
           </div>
         </ReactGridLayout>
       </div>
