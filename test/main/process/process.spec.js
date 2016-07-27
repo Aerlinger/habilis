@@ -1,190 +1,137 @@
 import { expect } from 'chai';
 import { spawn } from 'child_process';
+import _ from 'lodash'
+
+import uuid from 'uuid'
 
 import { create, kill, getChildren } from '../../../lib/main/processes'
+import { handle, dispatch } from '../../../lib/main/client'
+import { toPythonArgs, setDefaultEnvVars } from '../../../lib/main/utils/python'
+import { getVariables, getResult, getPythonScriptResults, execute, request, write } from '../../../lib/main/client'
 
-describe.only("Kernel", function() {
+describe("Kernel", function() {
+  this.timeout(5000)
 
-  it("spawns a child process", function(done) {
-    this.timeout(20000)
+  let kernelProc;
 
+  before(() => {
     const kernel_path = "./test/fixtures/kernel/start_kernel.py"
 
-    let spawned_child = create(kernel_path)
+    kernelProc = create("python", [kernel_path])
 
-    spawned_child.stderr.on('error', function(data) {
-      console.log("STDERR RECEIVED: ", data.toString())
+    kernelProc.stderr.on('data', function(data) {
+      console.error('STDERR:', data.toString())
+    })
 
-      expect(getChildren().length).to.eql(-1)
+    kernelProc.stdout.on('data', function(data) {
+      // console.log(data.toString())
+      // console.log( JSON.parse(data.toString()) )
+    })
 
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
+    kernelProc.stdin.on('data', function(data) {
+      console.log('STDIN:', data.toString())
+    })
+  })
 
-        done()
-      })
-    });
+  after((done) => {
+    kill(kernelProc).then(function({ code, signal }) {
+      done()
+    })
+  })
 
-    spawned_child.stderr.on('data', function(data) {
-      console.log("STDERR RECEIVED: ", data.toString())
+  it("spawns a single child process", function() {
+    expect(getChildren().length).to.eql(1)
+  })
 
-      expect(getChildren().length).to.eql(-1)
+  it("spawns a single child process", function(done) {
+    getResult(kernelProc, "1 + 1").then(function(res) {
+      console.log(res)
 
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
+      done()
+    })
+  })
 
-        done()
-      })
-    });
+  /*
 
-    spawned_child.on('end', (data) => {
-      console.log("END RECEIVED: ", data.toString())
+  it("Replies with kernel information", function(done) {
+    kernelProc.stdout.on('data', function(data) {
+      // console.log(data.toString())
 
-      expect(getChildren().length).to.eql(-1)
+      try {
+        var messageObject = JSON.parse(data.toString())
+
+        if (_.get(messageObject, 'result.msg_type') == 'execute_reply') {
+          done()
+        }
+      } catch(err) {
+        console.warn(err)
+      }
+    })
+  })
+  */
+
+  it("executes a script", function(done) {
+    getPythonScriptResults('./test/fixtures/sample.py').then(function(res) {
+      expect(res).to.eql('starting sample\n')
+
+      done()
+    })
+  })
+
+  it("sends a request", function(done) {
+    const code = '__get_variables(globals())',
+          args = {
+            allowStdin:  false,
+            stopOnError: true
+          };
+
+    let req = request(kernelProc, {
+      method: 'execute',
+      kwargs: _.assign({ code: "1 + 1" }, toPythonArgs(args))
+    }, {
+      successEvent: ['stream'],
+      hidden:       true
+    })
+
+    req.then(() => {
+      done()
+    })
+  })
+
+  xit("gets the result of an execution", function(done) {
+    this.timeout(10000)
+
+    const id     = uuid.v4().toString(),
+          target = 'manager',
+          method = 'interrupt_kernel';
+
+    write(kernelProc, {
+      id, target, method
+    }).then(function(result) {
+      console.log("RESULT")
+      console.log(result)
+
+      expect(result).to.eql("2")
+      done()
+    })
+  })
 
 
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
+  xit("gets the result of an execution", function(done) {
+    this.timeout(10000)
 
-        done()
-      })
-    });
+    execute(kernelProc, "1 + 1").then(function(result) {
+      expect(result).to.eql("2")
+      done()
+    })
+  })
 
-    spawned_child.on('token', (data) => {
-      console.log("ERROR RECEIVED: ", data.toString())
+  xit("gets current variables", function(done) {
+    this.timeout(10000)
 
-      expect(getChildren().length).to.eql(-1)
-
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.stdout.on('error', (data) => {
-      console.log("ERROR RECEIVED: ", data.toString())
-
-      expect(getChildren().length).to.eql(-1)
-
-      
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.stdout.on('data', (data) => {
-      console.log("DATA RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('connect', (data) => {
-      console.log("connection RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('connection', (data) => {
-      console.log("connection RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('disconnect', (data) => {
-      console.log("DISC RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('message', (data) => {
-      console.log("MESSAGE RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('data', (data) => {
-      console.log("DATA RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    spawned_child.on('error', function(data) {
-      console.log("STDERR RECEIVED: ", data.toString())
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-    
-    spawned_child.on('close', (data) => {
-      console.log("CLOSE EVENT RECEIVED: ", data)
-
-      expect(getChildren().length).to.eql(-1)
-
-      kill(spawned_child).then(function({code, signal}) {
-        console.log("EXIT SIGNAL: ", signal)
-        console.log("EXIT CODE: ", code)
-
-        done()
-      })
-    });
-
-    
-  });
-
+    getVariables(kernelProc).then(function(result) {
+      expect(result).to.eql("2")
+      done()
+    })
+  })
 })

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # start compatibility with IPython Jupyter 4.0
 try:
     from jupyter_client import manager
@@ -38,9 +36,9 @@ def add_input(input_queue):
 def kernel(wd=None, verbose=0):
     # setup ipython kernel and configure it
     kernel_manager, kernel_client = manager.start_new_kernel(extra_arguments=["--matplotlib='inline'"])
-    current_timeout_min = 0.0005
-    current_timeout_max = 0.01
-    current_timeout = current_timeout_max
+    current_timeout_min           = 0.0005
+    current_timeout_max           = 0.01
+    current_timeout               = current_timeout_max
 
     acceptable_types = [
       "execute_input",
@@ -55,7 +53,7 @@ def kernel(wd=None, verbose=0):
     # apply patches
     dirname = os.path.dirname(os.path.abspath(__file__))
     python_patch_file = os.path.join(dirname, "python-patch.py")
-    kernel_client.execute("%run " + python_patch_file, {"silent":True, "store_history":False})
+    kernel_client.execute("%run " + python_patch_file, { "silent": True, "store_history": False })
 
     # set working directory
     if wd:
@@ -69,18 +67,21 @@ def kernel(wd=None, verbose=0):
 
     # we're up and running!
     sys.stdout.write(json.dumps({ "id": "startup-complete", "status": "complete" }) + "\n")
+    sys.stdout.flush()
 
     while True:
         if not input_queue.empty():
             current_timeout = current_timeout_min
-            line = input_queue.get().strip()
-            payload = json.loads(line)
-            uid = payload["id"]
-            args = payload.get("args", [])
-            kwargs = payload.get("kwargs", {})
-            method = payload.get("method", False)
-            target_str = payload.get("target", "client")
-            exec_eval = payload.get("exec_eval", False)
+            line            = input_queue.get().strip()
+            payload         = json.loads(line)
+            uid             = payload["id"]
+            args            = payload.get("args", [])
+            kwargs          = payload.get("kwargs", {})
+            method          = payload.get("method", False)
+            target_str      = payload.get("target", "client")
+            exec_eval       = payload.get("exec_eval", False)
+
+            sys.stdout.write(json.dumps({ "payload": payload }) + '\n')
 
             if target_str == "manager":
               target = kernel_manager
@@ -90,7 +91,7 @@ def kernel(wd=None, verbose=0):
             if method:
                 if getattr(target, method, False):
                     result = getattr(target, method)(*args, **kwargs)
-                    sys.stdout.write(json.dumps({"source": "link", "result": result, "id": uid }) + '\n')
+                    sys.stdout.write(json.dumps({ "source": "link", "result": result, "id": uid }) + '\n')
                 else:
                     sys.stdout.write(json.dumps({ "error": "Missing method " + method, "id": uid }) + '\n')
 
@@ -123,11 +124,11 @@ def kernel(wd=None, verbose=0):
             pass
 
         current_timeout = min(current_timeout * 1.1, current_timeout_max)
+        #sys.stdout.flush()
 
 if __name__=="__main__":
     wd = None
     if len(sys.argv) > 1:
         wd = sys.argv[1]
 
-    print "Loading with args", sys.argv
     kernel(wd, verbose=2)
