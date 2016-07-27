@@ -17,15 +17,13 @@ describe.only("Jupyter Client", function() {
   let kernelProc;
   let client;
 
-  before(() => {
-    const kernel_path = "./test/fixtures/kernel/start_kernel.py"
-
+  before((done) => {
     // const child  = createPythonScriptProcess(targetFile, options)
-    kernelProc = create("python", [kernel_path])
+    kernelProc = create("python", ["./test/fixtures/kernel/start_kernel.py"])
     client = new JupyterClient(kernelProc);
 
     client.on("ready", function(res) {
-      console.log("READY", res)
+      done()
     })
 
     kernelProc.stderr.on('data', function(data) {
@@ -33,7 +31,7 @@ describe.only("Jupyter Client", function() {
     })
 
     kernelProc.stdout.on('data', function(data) {
-      log("info", "STDOUT", data.toString())
+      // log("info", "STDOUT", data.toString())
       // console.log( JSON.parse(data.toString()) )
     })
 
@@ -46,6 +44,7 @@ describe.only("Jupyter Client", function() {
 
   after((done) => {
     client.kill().then(function({ code, signal }) {
+      log("KILLING PID", code, signal)
       done()
     })
   })
@@ -54,13 +53,28 @@ describe.only("Jupyter Client", function() {
     expect(getChildren().length).to.eql(1)
   })
 
+  it("gets results", function(done) {
+    client.getResult("5 + 5").then(function(result) {
+      // expect(result).to.eql({})
+
+      done()
+    })
+  })
+
   it("performs simple eval", function(done) {
     client.getEval("113 + 6").then(function(result) {
-      console.log("THE RESULT", result)
-
       expect(result).to.eql(119)
 
       done()
     })
   })
+
+  it("gets variables", function(done) {
+    client.getVariables().then(function(result) {
+      // expect(result).to.eql({})
+
+      done()
+    })
+  })
+
 })
