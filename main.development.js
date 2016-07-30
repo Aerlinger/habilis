@@ -41,7 +41,7 @@ app.on('ready', async() => {
     height: 900
   });
 
-  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
+  mainWindow.loadURL(`file://${__dirname}/lib/renderer/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
