@@ -9,7 +9,7 @@ import config from './webpack.config.development';
 
 const app = express();
 const compiler = webpack(config);
-const PORT = config.dev_port;
+
 
 const wdm = webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
@@ -21,13 +21,13 @@ const wdm = webpackDevMiddleware(compiler, {
 app.use(wdm);
 app.use(webpackHotMiddleware(compiler));
 
-const server = app.listen(PORT, 'localhost', err => {
+const server = app.listen(config.dev_port, 'localhost', err => {
   if (err) {
     console.error(err);
     return;
   }
 
-  console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`Listening at http://localhost:${config.dev_port}`);
 });
 
 process.on('SIGTERM', () => {

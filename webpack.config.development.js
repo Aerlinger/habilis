@@ -2,24 +2,25 @@
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
 
-let devPort = 3001
+let dev_port = process.env.DEV_PORT || 3000
 
 const config = {
   ...baseConfig,
 
   debug: true,
-  dev_port: process.env.PORT || devPort,
+
+  dev_port: dev_port,
 
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
+    'webpack-hot-middleware/client?path=http://localhost:' + dev_port + '/__webpack_hmr',
     './lib/renderer/index'
   ],
 
   output: {
     ...baseConfig.output,
-    publicPath: 'http://localhost:3001/dist/'
+    publicPath: 'http://localhost:' + dev_port + '/dist/'
   },
 
   module: {
@@ -50,7 +51,13 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify('development'),
+
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'DEV_PORT': dev_port
+      }
     })
   ],
 
