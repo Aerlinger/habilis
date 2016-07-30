@@ -1,5 +1,7 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 
+import './lib/main/ipc'
+
 let menu;
 let template;
 let mainWindow = null;
