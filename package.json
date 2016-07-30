@@ -111,7 +111,7 @@
     "markdown-react-js": "^0.3.0",
     "postcss": "^5.0.21",
     "react": "^15.1.0",
-    "react-ace": "^3.4.1",
+    "react-codemirror": "^0.2.6",
     "react-dom": "^15.1.0",
     "react-grid-layout": "^0.12.7",
     "react-redux": "^4.4.5",
