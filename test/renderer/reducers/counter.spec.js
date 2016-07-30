@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import counter from '../../../app/reducers/counter';
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../../app/actions/counter';
+import counter from '../../../lib/renderer/reducers/counter';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../../lib/renderer/actions/counter';
 
 
 describe('reducers', () => {
