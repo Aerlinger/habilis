@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 export default class Toolbar extends Component {
 

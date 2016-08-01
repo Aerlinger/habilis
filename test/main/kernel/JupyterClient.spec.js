@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import { spawn } from 'child_process';
+import { expect } from 'chai'
+import { spawn } from 'child_process'
 import _ from 'lodash'
 
 import uuid from 'uuid'
@@ -14,13 +14,13 @@ asInternal(__filename)
 describe("Jupyter Client", function() {
   this.timeout(5000)
 
-  let kernelProc;
-  let client;
+  let kernelProc
+  let client
 
   before((done) => {
     // const child  = createPythonScriptProcess(targetFile, options)
     // kernelProc = create("python", ["./test/fixtures/kernel/start_kernel.py"])
-    client = new JupyterClient();
+    client = new JupyterClient()
     kernelProc = client.childProcess
 
     client.on("ready", function(res) {

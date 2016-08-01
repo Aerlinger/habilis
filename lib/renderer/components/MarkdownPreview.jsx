@@ -9,6 +9,6 @@ export default class MarkdownPreview extends React.Component {
   render() {
     return (
       <MDReactComponent text={this.props.text} />
-    );
+    )
   }
 }

@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import { spawn } from 'child_process';
+import { expect } from 'chai'
+import { spawn } from 'child_process'
 import _ from 'lodash'
 
 import uuid from 'uuid'
@@ -18,8 +18,8 @@ describe("Killing a process triggers close event", function() {
   let proc
 
   beforeEach((done) => {
-    client  = new JupyterClient();
-    proc = client.getChildProcess().process;
+    client  = new JupyterClient()
+    proc = client.getChildProcess().process
 
     client.on("ready", function() {
       console.log("CLIENT READY")
@@ -91,12 +91,12 @@ describe("Killing a process triggers close event", function() {
 describe("IPC messaging", function() {
   this.timeout(5000)
 
-  let client;
+  let client
   let proc
 
   before((done) => {
-    client = new JupyterClient();
-    proc = client.getChildProcess().process;
+    client = new JupyterClient()
+    proc = client.getChildProcess().process
 
 
     // CLIENT
@@ -219,7 +219,7 @@ describe("IPC messaging", function() {
   })
 
   xit("gets a result of a block of code", function(done) {
-    client.getResult("a='b'; foo='bar'").then(function(result) {
+    client.getResult("a='b' foo='bar'").then(function(result) {
       // expect(result["status"]).to.eql("ok")
 
       // expect(result).to.have.keys("status", "execution_count", "user_expressions", "payload")
@@ -229,7 +229,7 @@ describe("IPC messaging", function() {
   })
 
   it("execute returns an error for erroneous code", function(done) {
-    client.execute("a = b; foo='bar'").then(function(result) {
+    client.execute("a = b foo='bar'").then(function(result) {
 
       console.log("BASIC EXEC", result)
 

@@ -68,12 +68,12 @@ app.on('ready', async() => {
   }
 
   if (process.platform === 'darwin') {
-    var osx_menus = require("json!yaml!./static/menu/darwin.yml");
+    var osx_menus = require("json!yaml!./static/menu/darwin.yml")
 
-    menu = Menu.buildFromTemplate(osx_menus);
-    Menu.setApplicationMenu(menu);
+    menu = Menu.buildFromTemplate(osx_menus)
+    Menu.setApplicationMenu(menu)
   } else {
-    var default_menus = require("json!yaml!./static/menu/default.yml");
+    var default_menus = require("json!yaml!./static/menu/default.yml")
 
     menu = Menu.buildFromTemplate(default_menus);
     mainWindow.setMenu(menu);

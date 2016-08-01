@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import { spawn } from 'child_process';
+import { expect } from 'chai'
+import { spawn } from 'child_process'
 import _ from 'lodash'
 
 import { asInternal } from '../../../lib/main/utils/log'

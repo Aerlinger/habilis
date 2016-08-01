@@ -25,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/aerlinger/habilis.git"
   },
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Anthony Erlinger",
+    "email": "aerlinger@gmail.com",
+    "url": "https://github.com/aerlinger"
   },
   "license": "MIT",
   "bugs": {

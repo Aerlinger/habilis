@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
-import { expect } from 'chai';
-import { spy } from 'sinon';
-import reducers from '../../../lib/renderer/reducers';
+import { expect } from 'chai'
+import { spy } from 'sinon'
+import reducers from '../../../lib/renderer/reducers'
 
 describe('Root reducer', () => {
   it("adds a variable", () => {
@@ -16,7 +16,6 @@ describe('Root reducer', () => {
 
     expect(resultingState).to.eql(
       {
-        "counter": 0,
         "currentWorkingDirectory": ".",
         "routing":   {
           "locationBeforeTransitions": null
