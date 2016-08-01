@@ -7,7 +7,8 @@ import {
   Simulate
 } from 'react-addons-test-utils';
 import { Provider } from 'react-redux';
-import CounterPage from '../../../lib/renderer/containers/CounterPage';
+
+import CounterPage from '../../../lib/renderer/containers/CounterPage.jsx';
 import configureStore from '../../../lib/renderer/store/configureStore';
 
 

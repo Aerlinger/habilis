@@ -21,9 +21,11 @@ export default class Window extends Component {
           <div className="pane-group">
             <div className="pane-sm sidebar">
               <FormSamples />
+
             </div>
 
-            <div className="pane">
+            <div className="pane" style={{backgroundColor: 'lightgrey'}}>
+              { /*<MainPane />*/ }
               <MainPane />
             </div>
 

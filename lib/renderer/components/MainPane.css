@@ -1,0 +1,13 @@
+.main_pane {
+  background-color: red;
+  height: 100%;
+}
+
+.main_pane .code_editor {
+  height: 100% !important;
+}
+
+.code_editor {
+  height: 100% !important;
+}
+

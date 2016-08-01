@@ -1,0 +1,13 @@
+.CodeMirror {
+  height: 100% !important;
+}
+
+.ReactCodeMirror {
+  height: 100% !important;
+}
+
+.pane-sm {
+  border-left-color: rgb(221, 221, 221);
+  border-left-style: solid;
+  border-left-width: 1px;
+}

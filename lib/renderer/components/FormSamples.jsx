@@ -63,7 +63,7 @@ export default class MainPane extends Component {
           <div className="radio">
             <label>
               <input type="radio" name="radios"/>
-              Be sure to remember to check for unknown unknowns
+              Be sure to remember
             </label>
           </div>
           <div className="form-actions">

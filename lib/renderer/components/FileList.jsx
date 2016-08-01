@@ -19,31 +19,18 @@ export default class FileList extends Component {
         <tr>
           <th>Name</th>
           <th>Kind</th>
-          <th>File Size</th>
+          <th>Size</th>
         </tr>
         </thead>
-        
+
         <tbody>
         <tr>
           <td>photon.css</td>
           <td>CSS</td>
           <td>28K</td>
         </tr>
-        <tr>
-          <td>photon.css</td>
-          <td>CSS</td>
-          <td>28K</td>
-        </tr>
-        <tr>
-          <td>photon.css</td>
-          <td>CSS</td>
-          <td>28K</td>
-        </tr>
-        <tr>
-          <td>photon.css</td>
-          <td>CSS</td>
-          <td>28K</td>
-        </tr>
+
+        
         </tbody>
       </table>
     )
