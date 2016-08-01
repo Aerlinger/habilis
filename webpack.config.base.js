@@ -1,4 +1,6 @@
 import path from 'path';
+var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
 
 export default {
   module:    {
@@ -28,6 +30,9 @@ export default {
   },
   sassLoader: {
     includePaths: [path.resolve(__dirname, "./lib/renderer")]
+  },
+  postcss: function () {
+    return [precss, autoprefixer];
   },
   output:    {
     path:          path.join(__dirname, 'dist'),

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Codemirror from 'react-codemirror'
 import 'codemirror/mode/python/python'
 
@@ -11,6 +11,8 @@ export default class MainPane extends Component {
     super()
 
     this.state = {}
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
   updateCode(newCode) {
@@ -29,9 +31,7 @@ export default class MainPane extends Component {
     }
 
     return (
-      <div className={styles.main_pane}>
-        <Codemirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} ref="codeeditor"/>
-      </div>
+      <Codemirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} ref="codeeditor"/>
     )
   }
 }

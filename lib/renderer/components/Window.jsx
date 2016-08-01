@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import Toolbar from './Toolbar'
 import MainPane from './MainPane'
-import FileList from './FileList'
+import VariableList from './VariableList'
 import FormSamples from './FormSamples'
 
 export default class Window extends Component {
@@ -10,6 +11,8 @@ export default class Window extends Component {
     super()
 
     this.state = {}
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
   render() {
@@ -25,12 +28,11 @@ export default class Window extends Component {
             </div>
 
             <div className="pane" style={{backgroundColor: 'lightgrey'}}>
-              { /*<MainPane />*/ }
               <MainPane />
             </div>
 
             <div className="pane-sm sidebar">
-              <FileList />
+              <VariableList />
             </div>
 
           </div>

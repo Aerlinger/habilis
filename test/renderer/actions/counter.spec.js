@@ -14,11 +14,12 @@ describe('actions', () => {
   });
 
   it('incrementIfOdd should create increment action', () => {
-    const fn = actions.incrementIfOdd();
-    expect(fn).to.be.a('function');
-    const dispatch = spy();
+    const incrementIfOdd = actions.incrementIfOdd();
     const getState = () => ({ counter: 1 });
-    fn(dispatch, getState);
+    const dispatch = spy();
+
+    incrementIfOdd(dispatch, getState);
+
     expect(dispatch.calledWith({ type: actions.INCREMENT_COUNTER })).to.be.true;
   });
 

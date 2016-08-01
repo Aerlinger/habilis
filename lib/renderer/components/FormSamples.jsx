@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 export default class MainPane extends Component {
 
@@ -6,6 +7,8 @@ export default class MainPane extends Component {
     super()
 
     this.state = {}
+    
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
   static get defaultProps() {

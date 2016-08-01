@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { Link } from 'react-router'
 import Codemirror from 'react-codemirror'
+import 'codemirror/mode/python/python'
 
 import {ipcRenderer} from 'electron'
-// console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
-
-import styles from './Home.css'
+import MDReactComponent from 'markdown-react-js'
 
 import MarkdownPreview from './MarkdownPreview'
-import MDReactComponent from 'markdown-react-js'
-import ReactGridLayout from 'react-grid-layout'
 
-import 'codemirror/mode/python/python'
+require('css!./Home.css')
 
 ipcRenderer.on('asynchronous-reply', (event, arg) => {
   console.log(arg) // prints "pong"
