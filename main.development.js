@@ -1,19 +1,20 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell } from 'electron'
 
 import './lib/main/ipc'
 
-let menu;
-let template;
-let mainWindow = null;
+let menu
+let template
+let mainWindow = null
 
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')(); // eslint-disable-line global-require
+  require('electron-debug')() // eslint-disable-line global-require
 }
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+  if (process.platform !== 'darwin')
+    app.quit()
+})
 
 /*
 const installExtensions = async() => {
@@ -41,31 +42,31 @@ app.on('ready', async() => {
     show:   false,
     width:  1600,
     height: 900
-  });
+  })
 
-  mainWindow.loadURL(`file://${__dirname}/lib/renderer/app.html`);
+  mainWindow.loadURL(`file://${__dirname}/lib/renderer/app.html`)
 
   mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.show();
-    mainWindow.focus();
-  });
+    mainWindow.show()
+    mainWindow.focus()
+  })
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+    mainWindow = null
+  })
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
+    mainWindow.openDevTools()
     mainWindow.webContents.on('context-menu', (e, props) => {
-      const { x, y } = props;
+      const { x, y } = props
 
       Menu.buildFromTemplate([{
         label: 'Inspect element',
         click() {
-          mainWindow.inspectElement(x, y);
+          mainWindow.inspectElement(x, y)
         }
-      }]).popup(mainWindow);
-    });
+      }]).popup(mainWindow)
+    })
   }
 
   /*
@@ -81,4 +82,4 @@ app.on('ready', async() => {
     mainWindow.setMenu(menu);
   }
   */
-});
+})
