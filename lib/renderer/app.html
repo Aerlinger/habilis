@@ -2,10 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
+
     <title>Hello Electron React!</title>
+
     <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../node_modules/react-grid-layout/css/styles.css" />
     <link rel="stylesheet" href="../../node_modules/react-resizable/css/styles.css" />
+
+    <link rel="stylesheet" href="./assets/stylesheets/photon.css">
 
     <script type="text/javascript" src="./vendor/codemirror/codemirror.js"></script>
     <link rel="stylesheet" href="./vendor/codemirror/codemirror.css" />
@@ -23,7 +27,182 @@
   </head>
 
   <body style="background-color: #AAA;">
-    <div id="root"></div>
+    <!--<div id="root"></div>-->
+
+    <div class="window">
+
+      <header class="toolbar toolbar-header">
+        <h1 class="title">Header with actions</h1>
+
+        <div class="toolbar-actions">
+          <div class="btn-group">
+            <button class="btn btn-default">
+              <span class="icon icon-home"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-folder"></span>
+            </button>
+            <button class="btn btn-default active">
+              <span class="icon icon-cloud"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-popup"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-shuffle"></span>
+            </button>
+          </div>
+
+          <button class="btn btn-default">
+            <span class="icon icon-home icon-text"></span>
+            Filters
+          </button>
+
+          <button class="btn btn-default btn-dropdown pull-right">
+            <span class="icon icon-megaphone"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Your app's content goes inside .window-content -->
+      <div class="window-content">
+
+        <div class="pane-group">
+          <div class="pane-md sidebar">
+            <nav class="nav-group">
+              <h5 class="nav-group-title">Favorites</h5>
+              <a class="nav-group-item active">
+                <span class="icon icon-home"></span>
+                connors
+              </a>
+              <span class="nav-group-item">
+                <span class="icon icon-download"></span>
+                Downloads
+              </span>
+              <span class="nav-group-item">
+                <span class="icon icon-folder"></span>
+                Documents
+              </span>
+              <span class="nav-group-item">
+                <span class="icon icon-signal"></span>
+                AirPlay
+              </span>
+              <span class="nav-group-item">
+                <span class="icon icon-print"></span>
+                Applications
+              </span>
+              <span class="nav-group-item">
+                <span class="icon icon-cloud"></span>
+                Desktop
+              </span>
+            </nav>
+          </div>
+
+          <div class="pane">
+            <div class="tab-group">
+              <div class="tab-item">
+                <span class="icon icon-cancel icon-close-tab"></span>
+                Tab
+              </div>
+              <div class="tab-item active">
+                <span class="icon icon-cancel icon-close-tab"></span>
+                Tab active
+              </div>
+              <div class="tab-item">
+                <span class="icon icon-cancel icon-close-tab"></span>
+                Tab
+              </div>
+              <div class="tab-item tab-item-fixed">
+                <span class="icon icon-plus"></span>
+              </div>
+            </div>
+
+            <button class="btn btn-default">Default</button>
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-positive">Positive</button>
+            <button class="btn btn-negative">Negative</button>
+            <button class="btn btn-warning">Warning</button>
+
+            <form>
+              <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <select class="form-control">
+                <option>Option one</option>
+                <option>Option two</option>
+                <option>Option three</option>
+                <option>Option four</option>
+                <option>Option five</option>
+                <option>Option six</option>
+                <option>Option seven</option>
+                <option>Option eight</option>
+              </select>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> This is a checkbox
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> This is a checkbox too
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="radios" checked>
+                  Keep your options open
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="radios">
+                  Be sure to remember to check for unknown unknowns
+                </label>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-form btn-default">Cancel</button>
+                <button type="submit" class="btn btn-form btn-primary">OK</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="pane-md sidebar">
+            <ul class="list-group">
+              <li class="list-group-header">
+                <input class="form-control" type="text" placeholder="Search for someone">
+              </li>
+
+              <li class="list-group-item">
+                <img class="img-circle media-object pull-left" src="https://placehold.it/32x32" width="32" height="32">
+                <div class="media-body">
+                  <strong>List item title</strong>
+                  <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <img class="img-circle media-object pull-left" src="https://placehold.it/32x32" width="32" height="32">
+                <div class="media-body">
+                  <strong>List item title</strong>
+                  <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+              </li>
+              ...
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
     <script>
       (function() {
