@@ -34,9 +34,10 @@ app.on('window-all-closed', () => {
 })
 
 app.on('ready', async() => {
-  await installExtensions();
+  await installExtensions()
 
   mainWindow = new BrowserWindow({
+    backgroundColor: '#2e2c29',
     show:   false,
     width:  1600,
     height: 1200
@@ -44,7 +45,7 @@ app.on('ready', async() => {
 
   mainWindow.loadURL(`file://${__dirname}/lib/renderer/app.html`)
 
-  mainWindow.webContents.on('did-finish-load', () => {
+  mainWindow.on('ready-to-show', () => {
     mainWindow.show()
     mainWindow.focus()
   })
