@@ -1,3 +1,23 @@
+body {
+  position: relative;
+  height: 100vh;
+  font-family: Helvetica, Helvetica Neue, Arial;
+  overflow-y: hidden;
+}
+
+h2 {
+  color: #444;
+}
+
+a {
+  color: #444;
+  cursor: pointer;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
 .CodeMirror {
   height: 100% !important;
 }
@@ -11,3 +31,4 @@
   border-left-style: solid;
   border-left-width: 1px;
 }
+

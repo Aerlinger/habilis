@@ -30,7 +30,6 @@ export default merge(baseConfig, {
           'css-loader?sourceMap'
         ]
       },
-
       {
         test: /^((?!\.global).)*\.css$/,
         loaders: [

@@ -1,10 +1,5 @@
 # Habilis
 
-[![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][david_img]][david_site]
-
-![](./erb-logo.png)
 
 > A Modern IDE for Modern Data
 
