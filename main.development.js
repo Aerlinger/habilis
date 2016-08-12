@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu, shell } from 'electron'
 
-import './lib/main/ipc'
+import './src/main/ipc'
 
 let menu
 let template
@@ -43,7 +43,7 @@ app.on('ready', async() => {
     height: 1200
   })
 
-  mainWindow.loadURL(`file://${__dirname}/lib/renderer/app.html`)
+  mainWindow.loadURL(`file://${__dirname}/src/renderer/app.html`)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()

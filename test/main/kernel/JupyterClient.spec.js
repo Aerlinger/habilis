@@ -5,8 +5,8 @@ import _ from 'lodash'
 import uuid from 'uuid'
 
 // import { create, kill, getChildren } from '../../../lib/main/processes'
-import { JupyterClient } from '../../../lib/main/kernel/client'
-import { log, asInternal } from '../../../lib/main/utils/log'
+import { JupyterClient } from '../../../src/main/kernel/client'
+import { log, asInternal } from '../../../src/main/utils/log'
 
 asInternal(__filename)
 

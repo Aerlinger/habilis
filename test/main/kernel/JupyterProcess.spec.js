@@ -2,14 +2,14 @@ import { expect } from 'chai'
 import { spawn } from 'child_process'
 import _ from 'lodash'
 
-import { asInternal } from '../../../lib/main/utils/log'
+import { asInternal } from '../../../src/main/utils/log'
 // let log = asInternal(__filename)
 let log = console.log
 
 import uuid from 'uuid'
 
 // import { create, kill, getChildren } from '../../../lib/main/processes'
-import { getPythonScriptResults } from '../../../lib/main/kernel/client'
+import { getPythonScriptResults } from '../../../src/main/kernel/client'
 
 
 describe("Jupyter Kernel Process", function() {

@@ -14,7 +14,7 @@ export default merge(baseConfig, {
 
   entry: [
     'webpack-hot-middleware/client?path=http://localhost:' + dev_port + '/__webpack_hmr',
-    './lib/renderer/index'
+    './src/renderer/index'
   ],
 
   output: {

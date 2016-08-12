@@ -4,8 +4,8 @@ import _ from 'lodash'
 
 import uuid from 'uuid'
 
-import { JupyterClient, getPythonScriptResults, clientMap } from '../../../lib/main/kernel/client'
-import { asInternal } from '../../../lib/main/utils/log'
+import { JupyterClient, getPythonScriptResults, clientMap } from '../../../src/main/kernel/client'
+import { asInternal } from '../../../src/main/utils/log'
 
 asInternal(__filename)
 let log = console.log

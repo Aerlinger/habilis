@@ -29,7 +29,7 @@ export default {
     ]
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./lib/renderer")]
+    includePaths: [path.resolve(__dirname, "./src/renderer")]
   },
   postcss: function () {
     return [precss, autoprefixer];

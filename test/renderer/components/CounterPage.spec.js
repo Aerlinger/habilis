@@ -8,7 +8,7 @@ import {
 } from 'react-addons-test-utils'
 import { Provider } from 'react-redux'
 
-import configureStore from '../../../lib/renderer/store/configureStore'
+import configureStore from '../../../src/renderer/store/configureStore'
 
 
 function setup(initialState) {

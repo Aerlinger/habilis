@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 import { expect } from 'chai'
 import { spy } from 'sinon'
-import variables from '../../../lib/renderer/reducers/variables'
+import variables from '../../../src/renderer/reducers/variables'
 
 
 describe('variable reducer', () => {
