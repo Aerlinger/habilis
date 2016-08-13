@@ -76,12 +76,15 @@ class Editor extends Component {
 
     this.codeMirror.on('change', this.codemirrorValueChanged.bind(this))
 
-    this.codeMirror.on("gutterClick", (cm, n) => {
+    this.codeMirror.on("gutterClick", (cm, n, gutter, evt) => {
       let info = cm.lineInfo(n)
 
-      console.log("Gutter click!", n, info)
+      console.log("N", n)
+      console.log("info", info)
+      console.log("gutter", gutter)
+      console.log("evt", evt)
 
-      cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : this.makeMarker.bind(this))
+      cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : this.makeMarker())
     })
 
     this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
