@@ -19,7 +19,7 @@ export default class MainPane extends Component {
         <button className="btn btn-mini btn-warning">Warning</button>
 
         <form>
-          <div className="form-group">
+          <div className="form-group email">
             <label>Email address</label>
             <input type="email" className="form-control" placeholder="Email"/>
           </div>

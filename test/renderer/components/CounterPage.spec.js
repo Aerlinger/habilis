@@ -9,51 +9,27 @@ import {
 import { Provider } from 'react-redux'
 
 import configureStore from '../../../src/renderer/store/configureStore'
+import FormSamples from '../../../src/renderer/components/FormSamples.jsx'
 
 
 function setup(initialState) {
   const store = configureStore(initialState)
+
   const app = renderIntoDocument(
     <Provider store={store}>
-      <CounterPage />
+      <FormSamples />
     </Provider>
   )
+
   return {
     app,
-    buttons: scryRenderedDOMComponentsWithTag(app, 'button').map(button => button),
-    p: findRenderedDOMComponentWithClass(app, 'counter')
+    p: findRenderedDOMComponentWithClass(app, 'email')
   }
 }
 
-describe.skip('containers', () => {
-  describe('App', () => {
-    it('should display initial count', () => {
-      const { p } = setup()
-      expect(p.textContent).to.match(/^0$/)
-    })
-
-    it('should display updated count after increment button click', () => {
-      const { buttons, p } = setup()
-      Simulate.click(buttons[0])
-      expect(p.textContent).to.match(/^1$/)
-    })
-
-    it('should display updated count after descrement button click', () => {
-      const { buttons, p } = setup()
-      Simulate.click(buttons[1])
-      expect(p.textContent).to.match(/^-1$/)
-    })
-
-    it('shouldnt change if even and if odd button clicked', () => {
-      const { buttons, p } = setup()
-      Simulate.click(buttons[2])
-      expect(p.textContent).to.match(/^0$/)
-    })
-
-    it('should change if odd and if odd button clicked', () => {
-      const { buttons, p } = setup({ counter: 1 })
-      Simulate.click(buttons[2])
-      expect(p.textContent).to.match(/^2$/)
-    })
+describe('Form Variables', () => {
+  it('finds email tag', () => {
+    const { p } = setup()
+    expect(p.textContent).to.match(/^Email address$/)
   })
 })

@@ -34,25 +34,30 @@ describe.skip('Counter component', () => {
 
   it('first button should call increment', () => {
     const { buttons, actions } = setup()
+
     Simulate.click(buttons[0])
+    
     expect(actions.increment.called).to.be.true
   })
 
   it('second button should call decrement', () => {
     const { buttons, actions } = setup()
     Simulate.click(buttons[1])
+
     expect(actions.decrement.called).to.be.true
   })
 
   it('third button should call incrementIfOdd', () => {
     const { buttons, actions } = setup()
     Simulate.click(buttons[2])
+
     expect(actions.incrementIfOdd.called).to.be.true
   })
 
   it('fourth button should call incrementAsync', () => {
     const { buttons, actions } = setup()
     Simulate.click(buttons[3])
+
     expect(actions.incrementAsync.called).to.be.true
   })
 })
