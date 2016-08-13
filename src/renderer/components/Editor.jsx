@@ -6,6 +6,12 @@ import className from 'classnames'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python'
+import _ from 'lodash'
+
+import scrollbar from 'codemirror/addon/scroll/annotatescrollbar'
+import matchesoncscrollbar from 'codemirror/addon/search/matchesonscrollbar'
+import searchCursor from 'codemirror/addon/search/searchcursor'
+import match_highlighter from 'codemirror/addon/search/match-highlighter'
 
 import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
@@ -59,6 +65,7 @@ class Editor extends Component {
           cm.foldCode(cm.getCursor())
         }
       },
+      highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
       gutters:         ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     }
 
@@ -70,7 +77,7 @@ class Editor extends Component {
   }
 
   componentWillReceiveProps() {
-    return debounce(function(nextProps) {
+    return _.debounce(function(nextProps) {
       if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
         this.codeMirror.setValue(nextProps.value)
 
