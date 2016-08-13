@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --color --require ./test/test_helper.js test/**/*.spec.js",
-    "test-watch": "npm test -- --watch",
+    "test-watch": "npm test -- --watch --watch-extensions pegjs",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/test_helper.js --require co-mocha ./test/e2e.js",
     "lint": "eslint app test *.js",
     "hot-server": "node -r babel-register server.js",
