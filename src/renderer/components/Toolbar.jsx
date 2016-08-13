@@ -25,10 +25,6 @@ class Toolbar extends Component {
               <span className="icon icon-home"></span>
             </button>
 
-            <button className="btn btn-default">
-              <span className="icon icon-folder"></span>
-            </button>
-
             <button className="btn btn-default active">
               <span className="icon icon-cloud"></span>
             </button>
@@ -36,31 +32,54 @@ class Toolbar extends Component {
             <button className="btn btn-default">
               <span className="icon icon-popup"></span>
             </button>
-
-            <button className="btn btn-default">
-              <span className="icon icon-shuffle"></span>
-            </button>
           </div>
 
-          <button className="btn btn-positive" onClick={ this.props.executeCode }>
-            <span className="icon icon-play icon-text"></span>
-            Evaluate
-          </button>
+          <div className="btn-group">
+            <button className="btn btn-positive" onClick={ this.props.executeCode }>
+              <span className="icon icon-play icon-text"></span>
+              Evaluate
+            </button>
 
-          <button className="btn btn-positive">
-            <span className="icon icon-book icon-text"></span>
-            Get Documentation
-          </button>
+            <button className="btn btn-primary">
+              <span className="icon icon-book icon-text"></span>
+              Get Doc
+            </button>
 
-          <button className="btn btn-positive">
-            <span className="icon icon-pencil icon-text"></span>
-            Get Completion
-          </button>
+            <button className="btn btn-primary">
+              <span className="icon icon-code icon-text"></span>
+              Completion
+            </button>
 
-          <button className="btn btn-positive">
-            <span className="icon icon-list icon-text"></span>
-            Get Variables
-          </button>
+            <button className="btn btn-primary">
+              <span className="icon icon-list icon-text"></span>
+              Variables
+            </button>
+
+            <button className="btn btn-primary">
+              <span className="icon icon-doc-text icon-text"></span>
+              History
+            </button>
+
+            <button className="btn btn-primary">
+              <span className="icon icon-check icon-text"></span>
+              Completeness
+            </button>
+
+            <button className="btn btn-default">
+              <span className="icon icon-eye icon-text"></span>
+              Introspect
+            </button>
+
+            <button className="btn btn-default">
+              <span className="icon icon-info icon-text"></span>
+              Get Kernel Info
+            </button>
+
+            <button className="btn btn-negative">
+              <span className="icon icon-cancel icon-close"></span>
+              Shutdown Kernel
+            </button>
+          </div>
 
           <button className="btn btn-default btn-dropdown pull-right">
             <span className="icon icon-megaphone"></span>
