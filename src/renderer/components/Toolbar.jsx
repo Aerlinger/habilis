@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-export default class Toolbar extends Component {
+import * as KernelActions from '../actions/kernel'
+
+class Toolbar extends Component {
 
   constructor() {
     super()
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
-
 
   render() {
     return (
@@ -39,7 +42,7 @@ export default class Toolbar extends Component {
             </button>
           </div>
 
-          <button className="btn btn-positive">
+          <button className="btn btn-positive" onClick={ this.props.executeCode }>
             <span className="icon icon-play icon-text"></span>
             Evaluate
           </button>
@@ -69,3 +72,9 @@ export default class Toolbar extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return bindActionCreators(KernelActions, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Toolbar)
