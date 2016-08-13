@@ -12,6 +12,7 @@ import scrollbar from 'codemirror/addon/scroll/annotatescrollbar'
 import matchesoncscrollbar from 'codemirror/addon/search/matchesonscrollbar'
 import searchCursor from 'codemirror/addon/search/searchcursor'
 import match_highlighter from 'codemirror/addon/search/match-highlighter'
+import mplex from 'codemirror/addon/mode/multiplex'
 
 import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
@@ -25,12 +26,12 @@ class Editor extends Component {
 
   static get propTypes() {
     return {
-      onChange: React.PropTypes.func,
-      onFocusChange: React.PropTypes.func,
-      options: React.PropTypes.object,
-      path: React.PropTypes.string,
-      value: React.PropTypes.string,
-      className: React.PropTypes.any,
+      onChange:           React.PropTypes.func,
+      onFocusChange:      React.PropTypes.func,
+      options:            React.PropTypes.object,
+      path:               React.PropTypes.string,
+      value:              React.PropTypes.string,
+      className:          React.PropTypes.any,
       codeMirrorInstance: React.PropTypes.object
     }
   }
@@ -57,17 +58,31 @@ class Editor extends Component {
 
   componentDidMount() {
     let options = {
-      foldGutter:      true,
-      lineNumbers:     true,
-      styleActiveLine: true,
-      extraKeys:       {
+      foldGutter:                true,
+      lineNumbers:               true,
+      styleActiveLine:           true,
+      extraKeys:                 {
         "Ctrl--": function(cm) {
           cm.foldCode(cm.getCursor())
         }
       },
-      highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
-      gutters:         ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+      highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
+      gutters:                   ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+      mode:                      "demo",
+      lineWrapping:              true
     }
+
+    CodeMirror.defineMode("demo", function(config) {
+      return CodeMirror.multiplexingMode(
+        CodeMirror.getMode(config, "text/html"),
+        {
+          open:       "<<", close: ">>",
+          mode:       CodeMirror.getMode(config, "text/plain"),
+          delimStyle: "delimit"
+        }
+        // .. more multiplexed styles can follow here
+      )
+    })
 
     let codeMirrorInstance = this.getCodeMirrorInstance()
 
@@ -99,16 +114,16 @@ class Editor extends Component {
   }
 
   render() {
-     let editorClassName = className(
-       'ReactCodeMirror',
-       this.props.className)
+    let editorClassName = className(
+      'ReactCodeMirror',
+      this.props.className)
 
     return (
       <div className={editorClassName}>
         <textarea ref="editor"
                   name={this.props.path}
                   defaultValue={this.props.value}
-                  autoComplete='off' />
+                  autoComplete='off'/>
       </div>
     )
   }
