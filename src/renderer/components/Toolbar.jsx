@@ -24,26 +24,30 @@ export default class Toolbar extends Component {
 
         <div className="toolbar-actions">
           <div className="btn-group">
+
             <button className="btn btn-default">
               <span className="icon icon-home"></span>
             </button>
+
             <button className="btn btn-default">
               <span className="icon icon-folder"></span>
             </button>
+
             <button className="btn btn-default active">
               <span className="icon icon-cloud"></span>
             </button>
+
             <button className="btn btn-default">
               <span className="icon icon-popup"></span>
             </button>
+
             <button className="btn btn-default">
               <span className="icon icon-shuffle"></span>
             </button>
           </div>
 
-          <button className="btn btn-default">
-            <span className="icon icon-home icon-text"></span>
-            Filters
+          <button className="btn btn-positive">
+            <span className="icon icon-play"></span>
           </button>
 
           <button className="btn btn-default btn-dropdown pull-right">

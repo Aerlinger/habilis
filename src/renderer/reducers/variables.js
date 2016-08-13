@@ -10,6 +10,8 @@ const initialState = [
 ]
 
 export default function variables(state = initialState, action) {
+
+
   switch (action.type) {
     case "ADD_VARIABLE":
       return state.concat([
@@ -25,8 +27,7 @@ export default function variables(state = initialState, action) {
 
     case "CLEAR_VARIABLES":
       return []
-
-    default:
-      return state
   }
+
+  return state
 }

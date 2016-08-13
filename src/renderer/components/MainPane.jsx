@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Codemirror from 'react-codemirror'
 import 'codemirror/mode/python/python'
@@ -15,24 +16,12 @@ ipcRenderer.on('code-result', (event, arg) => {
   console.log(arg) // prints code result
 })
 
-export default class MainPane extends Component {
+class MainPane extends Component {
 
   constructor() {
     super()
 
-    this.state = {}
-
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-  }
-
-  updateCode(newCode) {
-    this.setState({
-      code: newCode
-    })
-  }
-
-  static get defaultProps() {
-    return {}
   }
 
   render() {
@@ -41,7 +30,29 @@ export default class MainPane extends Component {
     }
 
     return (
-      <Codemirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} ref="codeeditor"/>
+      <Codemirror value={this.props.value}
+                  onChange={this.props.onChange}
+                  options={options}
+                  ref="codeeditor"/>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    value: state.editor.value
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onChange: function(data) {
+      dispatch({
+        type: "EDITOR_UPDATE_TEXT",
+        value: data
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPane)
