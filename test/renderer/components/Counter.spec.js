@@ -36,7 +36,7 @@ describe.skip('Counter component', () => {
     const { buttons, actions } = setup()
 
     Simulate.click(buttons[0])
-    
+
     expect(actions.increment.called).to.be.true
   })
 

@@ -63,7 +63,7 @@ export default class Toolbar extends Component {
             <span className="icon icon-megaphone"></span>
           </button>
 
-          <span class="icon icon-hourglass">Idle</span>
+          <span className="icon icon-hourglass">Idle</span>
         </div>
       </header>
     )

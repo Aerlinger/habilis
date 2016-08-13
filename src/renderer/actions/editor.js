@@ -1,4 +1,4 @@
-export function updateCode(value) {
+export function onChange(value) {
   return {
     type: "EDITOR_UPDATE",
     value

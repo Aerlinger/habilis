@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Codemirror from 'react-codemirror'
 import 'codemirror/mode/python/python'
 
 import styles from './MainPane.css'
-import editor_actions from '../actions/editor'
+import * as editor_actions from '../actions/editor'
 
 import { ipcRenderer } from 'electron'
 
@@ -47,9 +48,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    onChange: editor_actions.updateCode
-  }
+  return bindActionCreators(editor_actions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPane)
