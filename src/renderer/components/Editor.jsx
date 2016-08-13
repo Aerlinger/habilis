@@ -13,6 +13,8 @@ import matchesoncscrollbar from 'codemirror/addon/search/matchesonscrollbar'
 import searchCursor from 'codemirror/addon/search/searchcursor'
 import match_highlighter from 'codemirror/addon/search/match-highlighter'
 
+import 'codemirror/mode/markdown/markdown'
+
 import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
 
@@ -57,6 +59,7 @@ class Editor extends Component {
 
   componentDidMount() {
     let options = {
+      mode: "markdown",
       foldGutter:      true,
       lineNumbers:     true,
       styleActiveLine: true,
