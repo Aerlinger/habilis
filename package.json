@@ -119,6 +119,7 @@
     "markdown-it": "^7.0.0",
     "markdown-it-math": "^4.0.1",
     "markdown-react-js": "^0.3.0",
+    "pegjs": "git+https://github.com/pegjs/pegjs.git",
     "react": "^15.2.1",
     "react-addons-pure-render-mixin": "^15.3.0",
     "react-codemirror": "^0.2.6",
