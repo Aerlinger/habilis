@@ -119,6 +119,7 @@
     "immutable": "^3.8.1",
     "katex": "^0.6.0",
     "keymaster": "^1.6.2",
+    "lodash": "^4.15.0",
     "markdown-it": "^7.0.0",
     "markdown-it-math": "^4.0.1",
     "markdown-react-js": "^0.3.0",

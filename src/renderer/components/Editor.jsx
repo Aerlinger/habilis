@@ -6,6 +6,7 @@ import className from 'classnames'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python'
+import _ from 'lodash'
 
 import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
@@ -35,6 +36,20 @@ class Editor extends Component {
     }
   }
 
+  /**
+   * Experimental
+   *
+   *
+   */
+
+  makeMarker() {
+    let marker = document.createElement("div")
+    marker.style.color = "#822"
+    marker.innerHTML = "●"
+
+    return marker
+  }
+
   getCodeMirrorInstance() {
     return this.props.codeMirrorInstance || require('codemirror')
   }
@@ -51,26 +66,29 @@ class Editor extends Component {
 
   componentDidMount() {
     let options = {
-      foldGutter:      true,
       lineNumbers:     true,
-      styleActiveLine: true,
-      extraKeys:       {
-        "Ctrl--": function(cm) {
-          cm.foldCode(cm.getCursor())
-        }
-      },
-      gutters:         ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+      gutters:         ["CodeMirror-linenumbers", "breakpoints"]
     }
 
     let codeMirrorInstance = this.getCodeMirrorInstance()
 
     this.codeMirror = codeMirrorInstance.fromTextArea(this.refs.editor, options)
+
     this.codeMirror.on('change', this.codemirrorValueChanged.bind(this))
+
+    this.codeMirror.on("gutterClick", (cm, n) => {
+      let info = cm.lineInfo(n)
+
+      console.log("Gutter click!", n, info)
+
+      cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : this.makeMarker.bind(this))
+    })
+
     this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
   }
 
   componentWillReceiveProps() {
-    return debounce(function(nextProps) {
+    return _.debounce(function(nextProps) {
       if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
         this.codeMirror.setValue(nextProps.value)
 
