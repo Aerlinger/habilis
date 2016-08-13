@@ -15,6 +15,18 @@ class MainPane extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
+  componentDidMount() {
+    let editor = this.refs.codeeditor.getCodeMirror()
+    let msg = document.createElement("div")
+    let icon = msg.appendChild(document.createElement("span"))
+    
+    icon.innerHTML = "<hr>"
+    icon.className = "lin-error-icon";
+    msg.className = "lint-error"
+
+    // editor.addLineWidget(2, msg, {coverGutter: false, noHScroll: true})
+  }
+
   render() {
     let options = {
       lineNumbers: true

@@ -35,17 +35,17 @@ class Toolbar extends Component {
           </div>
 
           <div className="btn-group">
-            <button className="btn btn-positive" onClick={ this.props.executeCode }>
+            <button className="btn btn-positive" onClick={ this.props.execute }>
               <span className="icon icon-play icon-text"></span>
-              Evaluate
+              Execute
             </button>
 
             <button className="btn btn-primary">
-              <span className="icon icon-book icon-text"></span>
+              <span className="icon icon-book icon-text" onClick={ this.props.getDoc }></span>
               Get Doc
             </button>
 
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={ this.props.getDoc }>
               <span className="icon icon-code icon-text"></span>
               Completion
             </button>
@@ -85,7 +85,7 @@ class Toolbar extends Component {
             <span className="icon icon-megaphone"></span>
           </button>
 
-          <span className="icon icon-hourglass">Idle</span>
+          <span className="icon icon-hourglass icon-text">Idle</span>
         </div>
       </header>
     )

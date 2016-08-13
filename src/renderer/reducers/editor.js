@@ -1,5 +1,11 @@
 let initialState = {
-  value: "# Initial Code"
+  value: `
+# Initial Code
+
+def some_function():
+  a = 5
+
+  `
 }
 
 export default function editor(state=initialState, action) {

@@ -1,5 +1,5 @@
 // Kernel-specific events
-// https://ipython.org/ipython-doc/3/development/messaging.html//completion
+// https://ipython.org/ipython-doc/3/development/messaging.html
 // https://github.com/ipython/ipython/wiki/Dev:-Javascript-Events
 //
 
