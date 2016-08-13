@@ -47,3 +47,16 @@ a:hover {
   border-left-style: solid;
   border-left-width: 1px;
 }
+
+.CodeMirror {
+  float: left;
+  width: 50%;
+  border: 1px solid black;
+}
+iframe {
+  width: 49%;
+  float: left;
+  height: 300px;
+  border: 1px solid black;
+  border-left: 0px;
+}

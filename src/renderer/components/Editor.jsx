@@ -12,6 +12,8 @@ import scrollbar from 'codemirror/addon/scroll/annotatescrollbar'
 import matchesoncscrollbar from 'codemirror/addon/search/matchesonscrollbar'
 import searchCursor from 'codemirror/addon/search/searchcursor'
 import match_highlighter from 'codemirror/addon/search/match-highlighter'
+import htmlmixed from 'codemirror/mode/htmlmixed/htmlmixed'
+import xml from 'codemirror/mode/xml/xml'
 
 import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
@@ -56,10 +58,13 @@ class Editor extends Component {
   }
 
   componentDidMount() {
+    let delay
+
     let options = {
       foldGutter:      true,
       lineNumbers:     true,
       styleActiveLine: true,
+      mode: 'text/html',
       extraKeys:       {
         "Ctrl--": function(cm) {
           cm.foldCode(cm.getCursor())
@@ -73,6 +78,21 @@ class Editor extends Component {
 
     this.codeMirror = codeMirrorInstance.fromTextArea(this.refs.editor, options)
     this.codeMirror.on('change', this.codemirrorValueChanged.bind(this))
+    this.codeMirror.on("change", () => {
+      clearTimeout(delay)
+      delay = setTimeout(updatePreview, 300)
+    })
+
+    let updatePreview = () => {
+      var previewFrame = document.getElementById('preview');
+      var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+      preview.open();
+      preview.write(this.codeMirror.getValue());
+      preview.close();
+    }
+
+    setTimeout(updatePreview, 300);
+
     this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
   }
 
@@ -109,6 +129,8 @@ class Editor extends Component {
                   name={this.props.path}
                   defaultValue={this.props.value}
                   autoComplete='off' />
+
+        <iframe id="preview"></iframe>
       </div>
     )
   }
