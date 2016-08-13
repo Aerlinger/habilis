@@ -5,7 +5,7 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --full-trace --color --require ./test/test_helper.js test/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --color --require ./test/test_helper.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/test_helper.js --require co-mocha ./test/e2e.js",
     "lint": "eslint app test *.js",
@@ -92,7 +92,9 @@
     "mocha": "^2.5.3",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.8.0",
+    "pegjs-backtrace": "^0.1.1",
     "precss": "^1.4.0",
+    "pretty-error": "^2.0.0",
     "react-addons-test-utils": "^15.2.1",
     "redux-logger": "^2.6.1",
     "sass-loader": "^4.0.0",

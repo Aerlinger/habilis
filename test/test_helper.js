@@ -21,3 +21,5 @@ window.localStorage = window.sessionStorage = {
     this[key] = undefined
   },
 }
+
+// require('pretty-error').start()
