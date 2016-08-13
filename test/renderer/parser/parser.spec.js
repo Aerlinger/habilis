@@ -9,19 +9,35 @@ import Tracer from 'pegjs-backtrace'
 describe.only('Parser', () => {
   let parser
 
-  before( () => {
-    let grammar = fs.readFileSync('./src/renderer/parser/grammars/python.pegjs', { encoding: "utf-8"} )
-    
-    parser = generate(grammar, {trace: true})
+  before(() => {
+    let grammar = fs.readFileSync('./src/renderer/parser/grammars/python.pegjs', { encoding: "utf-8" })
+
+    parser = generate(grammar, { trace: true })
   })
 
   it("recognizes a string comment", () => {
-    let input = "'''asdf:doc:asfd'''"
+    let input  =
+          `'''asdf:doc:asfd'''
+def test():
+  5`
     let tracer = new Tracer(input)
 
     try {
-      let parsed = parser.parse(input, {tracer})
-      expect(parsed).to.eql(["a", "b", "b", "a"])
+      let parsed = parser.parse(input, { tracer })
+      expect(parsed.cell).to.eql({
+          doc:  {
+            "content": "asfd",
+            "type":    "doc"
+          },
+          func: {
+            "block":      [
+              5
+            ],
+            "name":       "test",
+            "parameters": [],
+            "type":       "function"
+          }
+        })
     } catch(e) {
       console.log(tracer.getBacktraceString())
       throw e
