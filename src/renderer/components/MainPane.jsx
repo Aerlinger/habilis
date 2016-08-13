@@ -8,16 +8,6 @@ import 'codemirror/mode/python/python'
 import styles from './MainPane.css'
 import * as editor_actions from '../actions/editor'
 
-import { ipcRenderer } from 'electron'
-
-ipcRenderer.on('asynchronous-reply', (event, arg) => {
-  console.log(arg) // prints "pong"
-})
-
-ipcRenderer.on('code-result', (event, arg) => {
-  console.log(arg) // prints code result
-})
-
 class MainPane extends Component {
   constructor() {
     super()

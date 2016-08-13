@@ -131,3 +131,9 @@ ipcMain.on('get-result', (event, getResult) => {
     event.sender.send('code-result', result)
   })
 })
+
+ipcMain.on('kernel', (event, arg) => {
+  console.log("KERNEL")
+
+  event.sender.send('code-result', "KERNEL EVT RECV")
+})

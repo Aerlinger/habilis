@@ -1,24 +1,24 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import createLogger from 'redux-logger'
 import { hashHistory } from 'react-router'
 import { routerMiddleware } from 'react-router-redux'
+import createLogger from 'redux-logger'
+
 import rootReducer from '../reducers'
+import ipcMiddleware from '../ipc/ipcMiddleware'
 
 const logger = createLogger({
   level: 'info',
   collapsed: true,
 })
 
-const router = routerMiddleware(hashHistory)
-
-const enhancer = compose(
-  applyMiddleware(thunk, router, logger),
+const middleware = compose(
+  applyMiddleware(thunk, routerMiddleware(hashHistory), logger, ipcMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : noop => noop
 )
 
 export default function configureStore(initialState) {
-  const store = createStore(rootReducer, initialState, enhancer)
+  const store = createStore(rootReducer, initialState, middleware)
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
