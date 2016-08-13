@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-export default class MainPane extends Component {
+export default class Editor extends Component {
 
   constructor() {
     super()

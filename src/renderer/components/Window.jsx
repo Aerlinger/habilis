@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import Toolbar from './Toolbar'
-import MainPane from './MainPane'
+import Editor from './Editor'
 import VariableList from './VariableList'
 import FormSamples from './FormSamples'
 
@@ -25,7 +25,7 @@ export default class Window extends Component {
             </div>
 
             <div className="pane" style={{backgroundColor: 'lightgrey'}}>
-              <MainPane />
+              <Editor />
             </div>
 
             <div className="pane-sm sidebar">

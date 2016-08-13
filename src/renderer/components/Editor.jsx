@@ -7,10 +7,10 @@ import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python'
 
-import styles from './MainPane.css'
+import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
 
-class MainPane extends Component {
+class Editor extends Component {
   constructor() {
     super()
 
@@ -117,4 +117,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(editor_actions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPane)
+export default connect(mapStateToProps, mapDispatchToProps)(Editor)
