@@ -1,11 +1,8 @@
 let initialState = {
-  value: `
-# Initial Code
-
-def some_function():
+  value: `def some_function():
   a = 5
-
-  `
+def another_function():
+  return "foo"`
 }
 
 export default function editor(state=initialState, action) {
