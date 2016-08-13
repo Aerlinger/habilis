@@ -6,16 +6,9 @@ export default class Toolbar extends Component {
   constructor() {
     super()
 
-    this.state = {}
-
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
-  static get defaultProps() {
-    return {
-      reviews: []
-    }
-  }
 
   render() {
     return (
@@ -47,12 +40,30 @@ export default class Toolbar extends Component {
           </div>
 
           <button className="btn btn-positive">
-            <span className="icon icon-play"></span>
+            <span className="icon icon-play icon-text"></span>
+            Evaluate
+          </button>
+
+          <button className="btn btn-positive">
+            <span className="icon icon-book icon-text"></span>
+            Get Documentation
+          </button>
+
+          <button className="btn btn-positive">
+            <span className="icon icon-pencil icon-text"></span>
+            Get Completion
+          </button>
+
+          <button className="btn btn-positive">
+            <span className="icon icon-list icon-text"></span>
+            Get Variables
           </button>
 
           <button className="btn btn-default btn-dropdown pull-right">
             <span className="icon icon-megaphone"></span>
           </button>
+
+          <span class="icon icon-hourglass">Idle</span>
         </div>
       </header>
     )

@@ -10,8 +10,6 @@ export default class Window extends Component {
   constructor() {
     super()
 
-    this.state = {}
-
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
@@ -24,7 +22,6 @@ export default class Window extends Component {
           <div className="pane-group">
             <div className="pane-sm sidebar">
               <FormSamples />
-
             </div>
 
             <div className="pane" style={{backgroundColor: 'lightgrey'}}>

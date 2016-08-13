@@ -17,7 +17,6 @@ ipcRenderer.on('code-result', (event, arg) => {
 })
 
 class MainPane extends Component {
-
   constructor() {
     super()
 
@@ -32,6 +31,8 @@ class MainPane extends Component {
     return (
       <Codemirror value={this.props.value}
                   onChange={this.props.onChange}
+                  tabSize={2}
+                  tabindex="0"
                   options={options}
                   ref="codeeditor"/>
     )

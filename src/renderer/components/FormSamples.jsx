@@ -6,13 +6,7 @@ export default class MainPane extends Component {
   constructor() {
     super()
 
-    this.state = {}
-    
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-  }
-
-  static get defaultProps() {
-    return {}
   }
 
   render() {
