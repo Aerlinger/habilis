@@ -2,9 +2,13 @@
 import { expect } from 'chai'
 import { spy } from 'sinon'
 
+import * as actions from '../../../src/renderer/actions/editor'
 
-describe('actions', () => {
+describe('editor actions', () => {
   it("updates editor content", () => {
-    
+    expect(actions.updateCode("# This is updated")).to.eql({
+      type: "EDITOR_UPDATE",
+      value: "# This is updated"
+    })
   })
 })

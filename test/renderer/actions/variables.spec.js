@@ -4,8 +4,8 @@ import { spy } from 'sinon'
 import * as actions from '../../../src/renderer/actions/variables'
 
 
-describe('actions', () => {
-  it("updates editor content", () => {
+describe('variable actions', () => {
+  it("updates variables content", () => {
 
   })
 })

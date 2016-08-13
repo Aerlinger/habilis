@@ -5,6 +5,7 @@ import Codemirror from 'react-codemirror'
 import 'codemirror/mode/python/python'
 
 import styles from './MainPane.css'
+import editor_actions from '../actions/editor'
 
 import { ipcRenderer } from 'electron'
 
@@ -47,12 +48,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChange: function(data) {
-      dispatch({
-        type: "EDITOR_UPDATE_TEXT",
-        value: data
-      })
-    }
+    onChange: editor_actions.updateCode
   }
 }
 

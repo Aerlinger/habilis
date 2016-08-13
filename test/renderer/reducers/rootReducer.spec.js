@@ -17,13 +17,16 @@ describe('Root reducer', () => {
     expect(resultingState).to.eql(
       {
         "currentWorkingDirectory": ".",
-        "routing":   {
+        "routing":                 {
           "locationBeforeTransitions": null
         },
-        "variables": [
+        "editor":                  {
+          "value": "# Initial Code"
+        },
+        "variables":               [
           {
-            name: "VARNAME",
-            type: "<INT>",
+            name:        "VARNAME",
+            type:        "<INT>",
             description: "DESCR."
           },
           {
