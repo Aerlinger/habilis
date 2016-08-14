@@ -1,0 +1,22 @@
+@import "codemirror.scss";
+
+body {
+  position: relative;
+  height: 100vh;
+  font-family: Helvetica, Helvetica Neue, Arial;
+  overflow-y: hidden;
+  background: #EDEBED url(../images/light-grey-textured-background.png);
+}
+
+h2 {
+  color: #444;
+}
+
+a {
+  color: #444;
+  cursor: pointer;
+}
+
+a:hover {
+  cursor: pointer;
+}

@@ -7,7 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes'
 import configureStore from './store/configureStore'
 import 'codemirror/lib/codemirror.css'
-import './assets/stylesheets/custom.scss'
+import './assets/stylesheets/base.scss'
 import './assets/stylesheets/photon/photon.scss'
 
 const store   = configureStore()

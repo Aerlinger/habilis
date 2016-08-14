@@ -1,33 +1,20 @@
-body {
-  position: relative;
-  height: 100vh;
-  font-family: Helvetica, Helvetica Neue, Arial;
-  overflow-y: hidden;
-  background: #EDEBED url(../images/light-grey-textured-background.png);
-
-
+.CodeMirror {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
-.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
 .CodeMirror-focused .cm-matchhighlight {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
   background-position: bottom;
   background-repeat: repeat-x;
 }
-.cm-matchhighlight {background-color: lightgreen}
-.CodeMirror-selection-highlight-scrollbar {background-color: green}
 
-h2 {
-  color: #444;
+.cm-matchhighlight {
+  background-color: lightgreen
 }
 
-a {
-  color: #444;
-  cursor: pointer;
-}
-
-a:hover {
-  cursor: pointer;
+.CodeMirror-selection-highlight-scrollbar {
+  background-color: green
 }
 
 .CodeMirror {
