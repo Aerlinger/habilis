@@ -27,13 +27,14 @@ const server = app.listen(config.dev_port, 'localhost', err => {
     return;
   }
 
-  console.log(`Listening at http://localhost:${config.dev_port}`);
-});
+  console.log(`Listening at http://localhost:${config.dev_port}`)
+})
 
 process.on('SIGTERM', () => {
-  console.log('Stopping dev server');
-  wdm.close();
+  console.log('Stopping dev server')
+
+  wdm.close()
   server.close(() => {
-    process.exit(0);
-  });
-});
+    process.exit(0)
+  })
+})

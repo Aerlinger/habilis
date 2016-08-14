@@ -22,20 +22,20 @@ function convertMenu(ipcEmitter, definition) {
     const clickAction = itemDefinition.click,
           clickActionType = clickAction && clickAction.type,
           submenu = itemDefinition.submenu,
-          item = _.pickBy(itemDefinition, _.isString); // clone all strings
+          item = _.pickBy(itemDefinition, _.isString) // clone all strings
 
     if (_.isArray(submenu)) {
-      item.submenu = convertMenu(ipcEmitter, submenu);
+      item.submenu = convertMenu(ipcEmitter, submenu)
     } else if (submenu) {
-      throw new Error('Bad menu configuration: ' + util.inspect(itemDefinition));
+      throw new Error('Bad menu configuration: ' + util.inspect(itemDefinition))
     }
 
     if (_.isString(clickActionType)) {
-      item.click = ipcEmitter.send.bind(ipcEmitter, 'dispatch', clickAction);
+      item.click = ipcEmitter.send.bind(ipcEmitter, 'dispatch', clickAction)
     }
 
-    return item;
-  });
+    return item
+  })
 }
 
 /**
@@ -45,15 +45,15 @@ function convertMenu(ipcEmitter, definition) {
  */
 export function toElectronMenuTemplate(ipcEmitter, definition) {
   return bluebird.try(function () {
-    return convertMenu(ipcEmitter, definition);
-  });
+    return convertMenu(ipcEmitter, definition)
+  })
 }
 
 export function getByName(name) {
   return files.readFile(path.resolve(__dirname, '..', 'menus', name + '.yml'))
-              .then(jsYaml.safeLoad);
+              .then(jsYaml.safeLoad)
 }
 
 // let menu = Menu.buildFromTemplate(getMenuShortcutsTemplate()),
 //   fileMenu = Menu.buildFromTemplate(getFileMenuTemplate()),
-//   folderMenu = Menu.buildFromTemplate(getFolderMenuTemplate());
+//   folderMenu = Menu.buildFromTemplate(getFolderMenuTemplate())

@@ -29,15 +29,14 @@ const installExtensions = async() => {
 }
 
 app.on('window-all-closed', () => {
-  if (process.env.NODE_ENV === 'development' || process.platform !== 'darwin')
-    app.quit()
+  app.quit()
 })
 
 app.on('ready', async() => {
   await installExtensions()
 
   mainWindow = new BrowserWindow({
-    backgroundColor: '#2e2c29',
+    backgroundColor: '#2E2C29',
     show:   false,
     width:  1600,
     height: 1200
@@ -76,7 +75,7 @@ app.on('ready', async() => {
   } else {
     var default_menus = require("json!yaml!./static/menu/default.yml")
 
-    menu = Menu.buildFromTemplate(default_menus);
-    mainWindow.setMenu(menu);
+    menu = Menu.buildFromTemplate(default_menus)
+    mainWindow.setMenu(menu)
   }
 })

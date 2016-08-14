@@ -13,7 +13,7 @@ export default merge(baseConfig, {
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:' + dev_port + '/__webpack_hmr',
+    'webpack-hot-middleware/client?path=http://localhost:' + dev_port + '/__webpack_hmr&timeout=2000&noInfo=true',
     './src/renderer/index'
   ],
 
