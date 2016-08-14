@@ -3,15 +3,18 @@
 
 > A Modern IDE for Modern Data
 
-## Screenshot
+## TODO:
 
+- IPC Dispatching router from renderer to main
+- IPC Routing from main
+
+## Screenshot
 
 ## Install
 
 ```bash
 $ cd your-project-name && npm install
 ```
-
 
 ## Run
 
@@ -29,7 +32,6 @@ $ npm run dev
 ```
 
 *Note: requires a node version >= 4 and an npm version >= 2.*
-
 
 ## DevTools
 
@@ -58,15 +60,9 @@ externals: [
 You can find those lines in the file.
 
 
-## CSS Modules
+## SASS Modules
 
-This boilerplate out of the box is configured to use [css-modules](https://github.com/css-modules/css-modules).
-
-All `.css` file extensions will use css-modules unless it has `.global.css`.
-
-If you need global styles, stylesheets with `.global.css` will not go through the
-css-modules loader. e.g. `app.global.css`
-
+- Styles are loaded from `src/renderer/assets/stylesheets`
 
 ## Package
 
@@ -114,8 +110,6 @@ see discussions in [#118](https://github.com/chentsulin/electron-react-boilerpla
 We use [webpack-target-electron-renderer](https://github.com/chentsulin/webpack-target-electron-renderer) to provide a build target for electron renderer process. Read more information [here](https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works).
 
 > Note: webpack >= 1.12.15 has built-in support for `electron-main` and `electron-renderer` targets.
-
-
 
 ## License
 MIT © [Anthony Erlinger](https://github.com/arlinger)
