@@ -6,7 +6,7 @@ import * as actions from '../../../src/renderer/actions/editor'
 
 describe('editor actions', () => {
   it("updates editor content", () => {
-    expect(actions.updateCode("# This is updated")).to.eql({
+    expect(actions.onChange("# This is updated")).to.eql({
       type: "EDITOR_UPDATE",
       value: "# This is updated"
     })

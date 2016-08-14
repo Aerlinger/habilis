@@ -6,7 +6,7 @@ import { generate, parse } from 'pegjs'
 
 import Tracer from 'pegjs-backtrace'
 
-describe.only('Parser', () => {
+describe('Parser', () => {
   let parser
 
   before(() => {

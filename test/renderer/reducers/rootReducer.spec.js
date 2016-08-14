@@ -4,7 +4,7 @@ import { spy } from 'sinon'
 import reducers from '../../../src/renderer/reducers'
 
 describe('Root reducer', () => {
-  it("adds a variable", () => {
+  it("has correct initial state", () => {
     let initialState = {}
 
     let resultingState = reducers(initialState, {
@@ -21,7 +21,14 @@ describe('Root reducer', () => {
           "locationBeforeTransitions": null
         },
         "editor":                  {
-          "value": "# Initial Code"
+          "value": "def some_function():\n  a = 5\ndef another_function():\n  return \"foo\"",
+          "pos": [30, 13],
+          "cells": [
+
+          ],
+          "history": [
+
+          ]
         },
         "variables":               [
           {
@@ -40,4 +47,3 @@ describe('Root reducer', () => {
   })
 
 })
-
