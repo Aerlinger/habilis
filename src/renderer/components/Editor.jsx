@@ -26,7 +26,9 @@ class Editor extends Component {
   static get propTypes() {
     return {
       onChange:           React.PropTypes.func,
-      onFocusChange:      React.PropTypes.func,
+      onChanges:          React.PropTypes.func,
+      onFocus:            React.PropTypes.func,
+      onBlur:             React.PropTypes.func,
       options:            React.PropTypes.object,
       path:               React.PropTypes.string,
       value:              React.PropTypes.string,
@@ -66,9 +68,8 @@ class Editor extends Component {
   }
 
   onChange(doc, change) {
-    if (this.props.onChange && change.origin != 'setValue') {
+    if (this.props.onChange && change.origin != 'setValue')
       this.props.onChange(doc.getValue())
-    }
   }
 
   onChanges(instance, changes) {
@@ -82,13 +83,15 @@ class Editor extends Component {
 
     this.codeMirror.on('change', this.onChange.bind(this))
     this.codeMirror.on('changes', this.onChanges.bind(this))
+    this.codeMirror.on('focus', this.props.onFocus.bind(this))
+    this.codeMirror.on('blur', this.props.onBlur.bind(this))
 
     // this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
-      this.codeMirror.setValue(nextProps.value)
+    // if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
+      // this.codeMirror.setValue(nextProps.value)
 
     if (typeof nextProps.options === 'object')
       for (let optionName in nextProps.options)
