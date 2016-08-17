@@ -8,6 +8,73 @@
 - IPC Dispatching router from renderer to main
 - IPC Routing from main
 
+## Architecture
+
+- renderer
+- main
+- kernel
+
+## Kernel actions
+
+- connect
+- info
+- shutdown
+- execute
+- eval
+- interrupt
+- getCompletion
+- getVariables
+- getHistory
+- getDocumentation
+
+## IPython request types
+
+### Messages to kernel
+- execute_request
+- inspect_request
+- complete_request
+- history_request
+- is_complete_request
+- connect_request
+- shutdown_request
+
+#### IOPUB actions
+
+- errorOccurred
+- dataDisplayed
+- resultComputed
+- dataStreamed
+- inputExecuted
+- stateChanged
+- unknownEventOccurred
+
+## Message propagation
+
+*client*
+```javascript
+ipcRenderer.send("execute")
+```
+
+*main*
+```javascript
+ipcMain.on("execute", function(evt, msg){
+  
+  clientProcess.write(msg.code).then(function(result) {
+    evt.sender.send("results")
+  })
+})
+```
+
+*client*
+
+```javascript
+ipcRenderer.on("results", function(evt, results){
+  console.log("results", results)
+  
+  dispatch("event-name", { results })
+});
+```
+
 ## Screenshot
 
 ## Install
