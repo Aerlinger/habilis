@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 
-import { JupyterClient } from './kernel/client'
+import { JupyterClient } from './kernel/JupyterClient'
 
 let client = new JupyterClient();
 let proc = client.getChildProcess().process;

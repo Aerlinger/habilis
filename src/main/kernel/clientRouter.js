@@ -16,7 +16,7 @@ let outputMap = {}
  * @param child
  */
 export function dispatchEvents(client) {
-  let child = client.childProcess.process
+  let child = client.parentProcess.process
 
   // TODO: Use promises instead of events
   const objectEmitter = createObjectEmitter(child.stdout)

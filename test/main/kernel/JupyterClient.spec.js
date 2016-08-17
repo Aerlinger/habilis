@@ -5,7 +5,7 @@ import _ from 'lodash'
 import uuid from 'uuid'
 
 // import { create, kill, getChildren } from '../../../lib/main/processes'
-import { JupyterClient } from '../../../src/main/kernel/client'
+import { JupyterClient } from '../../../src/main/kernel/JupyterClient'
 import { log, asInternal } from '../../../src/main/utils/log'
 
 asInternal(__filename)
@@ -21,7 +21,7 @@ describe("Jupyter Client", function() {
     // const child  = createPythonScriptProcess(targetFile, options)
     // kernelProc = create("python", ["./test/fixtures/kernel/start_kernel.py"])
     client = new JupyterClient()
-    kernelProc = client.childProcess
+    kernelProc = client.parentProcess
 
     client.on("ready", function(res) {
       /*

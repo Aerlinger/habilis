@@ -36,7 +36,7 @@ function removeChild(child) {
 export function create(str, args, options) {
   let childProcess = ChildProcess
     .spawn(str, args || options, args && options)
-    // .on('close', () => removeChild(childProcess))
+    // .on('close', () => removeChild(parentProcess))
 
   addChild(childProcess)
 
@@ -82,8 +82,8 @@ export function exec(str, args, options) {
  * - onHeartbeatFail
  */
 export class JupyterProcess {
-  constructor(parentClient, options) {
-    this.parentClient = parentClient
+  constructor(childClient, options) {
+    this.childClient = childClient
 
     const kernelStartupFile = path.resolve(path.join(__dirname, '..', '..', 'kernels', 'python', 'bin', 'start_kernel.py'))
 

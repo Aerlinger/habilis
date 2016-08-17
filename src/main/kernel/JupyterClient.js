@@ -73,15 +73,14 @@ export class JupyterClient extends EventEmitter {
   constructor() {
     super()
 
-    this.childProcess = new JupyterProcess()
-    this.childProcess.parent = this
+    this.parentProcess        = new JupyterProcess(this)
 
     this.requestMap   = {}
 
-    clientMap[this.childProcess.process.pid] = this
+    clientMap[this.parentProcess.process.pid] = this
 
-    this.childProcess.process.on('close', () => {
-      delete clientMap[this.childProcess.process.pid]
+    this.parentProcess.process.on('close', () => {
+      delete clientMap[this.parentProcess.process.pid]
     })
 
     clientRouter.dispatchEvents(this)
@@ -101,7 +100,7 @@ export class JupyterClient extends EventEmitter {
     const id     = uuid.v4().toString()
     const reqObj = _.assign({ id }, invocation)
 
-    const inputPromise = this.childProcess.write(reqObj)
+    const inputPromise = this.parentProcess.write(reqObj)
     const startTime    = new Date().getTime()
 
     const outputPromise = new Promise((resolve, reject) => {
@@ -112,8 +111,6 @@ export class JupyterClient extends EventEmitter {
       .then(() => outputPromise)
       .finally(() => {
         const endTime = (new Date().getTime() - startTime) + 'ms'
-
-        // log('info', 'SENT REQ:', reqObj, endTime)
 
         // clean up reference, no matter what the result
         delete this.requestMap[id]
@@ -151,7 +148,7 @@ export class JupyterClient extends EventEmitter {
     const target = 'manager'
     const method = 'interrupt_kernel'
 
-    return this.childProcess.write({ method, target, id })
+    return this.parentProcess.write({ method, target, id })
   }
 
   /**
@@ -284,11 +281,11 @@ export class JupyterClient extends EventEmitter {
    * @returns {Promise}
    */
   kill() {
-    return this.childProcess.kill()
+    return this.parentProcess.kill()
   }
 
   getChildProcess() {
-    return this.childProcess
+    return this.parentProcess
   }
 }
 

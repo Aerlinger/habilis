@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import uuid from 'uuid'
 
-import { JupyterClient, getPythonScriptResults, clientMap } from '../../../src/main/kernel/client'
+import { JupyterClient, getPythonScriptResults, clientMap } from '../../../src/main/kernel/JupyterClient'
 import { asInternal } from '../../../src/main/utils/log'
 
 asInternal(__filename)

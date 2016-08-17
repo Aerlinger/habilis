@@ -9,7 +9,7 @@ let log = console.log
 import uuid from 'uuid'
 
 // import { create, kill, getChildren } from '../../../lib/main/processes'
-import { getPythonScriptResults } from '../../../src/main/kernel/client'
+import { getPythonScriptResults } from '../../../src/main/kernel/JupyterClient'
 
 
 describe("Jupyter Kernel Process", function() {
