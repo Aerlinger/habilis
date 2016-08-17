@@ -82,7 +82,7 @@ class Editor extends Component {
     this.codeMirror = this.getCodeMirrorInstance().fromTextArea(this.refs.editor, editorOptions)
 
     this.codeMirror.on('change', this.onChange.bind(this))
-    this.codeMirror.on('changes', this.onChanges.bind(this))
+    this.codeMirror.on('changes', this.props.onChanges.bind(this))
     this.codeMirror.on('focus', this.props.onFocus.bind(this))
     this.codeMirror.on('blur', this.props.onBlur.bind(this))
 
