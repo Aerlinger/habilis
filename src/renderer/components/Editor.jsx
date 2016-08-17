@@ -25,12 +25,12 @@ class Editor extends Component {
 
   static get propTypes() {
     return {
-      onChange: React.PropTypes.func,
-      onFocusChange: React.PropTypes.func,
-      options: React.PropTypes.object,
-      path: React.PropTypes.string,
-      value: React.PropTypes.string,
-      className: React.PropTypes.any,
+      onChange:           React.PropTypes.func,
+      onFocusChange:      React.PropTypes.func,
+      options:            React.PropTypes.object,
+      path:               React.PropTypes.string,
+      value:              React.PropTypes.string,
+      className:          React.PropTypes.any,
       codeMirrorInstance: React.PropTypes.object
     }
   }
@@ -38,6 +38,22 @@ class Editor extends Component {
   static get defaultProps() {
     return {
       className: "codemirror-container"
+    }
+  }
+
+  defaultOptions() {
+    return {
+      autofocus:                 true,
+      foldGutter:                true,
+      lineNumbers:               true,
+      styleActiveLine:           true,
+      extraKeys:                 {
+        "Ctrl--": function(cm) {
+          cm.foldCode(cm.getCursor())
+        }
+      },
+      highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
+      gutters:                   ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     }
   }
 
@@ -49,47 +65,35 @@ class Editor extends Component {
     return this.codeMirror
   }
 
-  codemirrorValueChanged(doc, change) {
+  onChange(doc, change) {
     if (this.props.onChange && change.origin != 'setValue') {
       this.props.onChange(doc.getValue())
     }
   }
 
-  componentDidMount() {
-    let options = {
-      foldGutter:      true,
-      lineNumbers:     true,
-      styleActiveLine: true,
-      extraKeys:       {
-        "Ctrl--": function(cm) {
-          cm.foldCode(cm.getCursor())
-        }
-      },
-      highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
-      gutters:         ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-    }
-
-    let codeMirrorInstance = this.getCodeMirrorInstance()
-
-    this.codeMirror = codeMirrorInstance.fromTextArea(this.refs.editor, options)
-    this.codeMirror.on('change', this.codemirrorValueChanged.bind(this))
-    this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
+  onChanges(instance, changes) {
+    console.log("BULK", changes)
   }
 
-  componentWillReceiveProps() {
-    return _.debounce(function(nextProps) {
-      if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
-        this.codeMirror.setValue(nextProps.value)
+  componentDidMount() {
+    let editorOptions = _.merge(this.defaultOptions(), this.props.options)
 
+    this.codeMirror = this.getCodeMirrorInstance().fromTextArea(this.refs.editor, editorOptions)
 
-      if (typeof nextProps.options === 'object') {
-        for (let optionName in nextProps.options) {
-          if (nextProps.options.hasOwnProperty(optionName)) {
-            this.codeMirror.setOption(optionName, nextProps.options[optionName]);
-          }
-        }
-      }
-    }, 0)
+    this.codeMirror.on('change', this.onChange.bind(this))
+    this.codeMirror.on('changes', this.onChanges.bind(this))
+
+    // this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.codeMirror && nextProps.value !== undefined && this.codeMirror.getValue() != nextProps.value)
+      this.codeMirror.setValue(nextProps.value)
+
+    if (typeof nextProps.options === 'object')
+      for (let optionName in nextProps.options)
+        if (nextProps.options.hasOwnProperty(optionName))
+          this.codeMirror.setOption(optionName, nextProps.options[optionName])
   }
 
   componentWillUnmount() {
@@ -99,16 +103,14 @@ class Editor extends Component {
   }
 
   render() {
-     let editorClassName = className(
-       'ReactCodeMirror',
-       this.props.className)
+    let editorClassName = className('ReactCodeMirror', this.props.className)
 
     return (
       <div className={editorClassName}>
         <textarea ref="editor"
                   name={this.props.path}
                   defaultValue={this.props.value}
-                  autoComplete='off' />
+                  autoComplete='off'/>
       </div>
     )
   }
