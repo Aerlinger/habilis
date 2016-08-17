@@ -5,14 +5,10 @@ export function onChange(value) {
   }
 }
 
-export function onChanges(from, to, text, removed, origin) {
+export function onChanges(cm, ...changes) {
   return {
     type: "EDITOR_CHANGES",
-          from,
-          to,
-          text,
-          removed,
-          origin
+          changes
   }
 }
 

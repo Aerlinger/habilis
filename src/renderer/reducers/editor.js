@@ -18,15 +18,7 @@ export default function editor(state=initialState, action) {
     case "EDITOR_CHANGES":
       return {
         value: action['value'],
-        history: state['history'].concat(
-          {
-            from: action.from,
-            to: action.to,
-            text: action.text,
-            removed: action.removed,
-            origin: action.origin
-          }
-        ),
+        history: state['history'].concat(action.changes),
         hasFocus: true
       }
     case "FOCUS":
