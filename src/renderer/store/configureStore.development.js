@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux'
 import createLogger from 'redux-logger'
 
 import rootReducer from '../reducers'
-import ipcMiddleware from '../ipc/ipcMiddleware'
+import ipcMiddleware from '../ipc/ipcDispatcher'
 
 const logger = createLogger({
   level: 'info',

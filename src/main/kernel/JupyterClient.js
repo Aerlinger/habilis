@@ -52,9 +52,6 @@ function resolveHomeDirectory(options) {
  * @returns {object}
  */
 function getPythonCommandOptions(options) {
-
-  // log("getPythonCommandOptions: ", options)
-
   options = resolveHomeDirectory(options)
 
   return _.assign({

@@ -3,7 +3,7 @@
 - Algorithms and numerical methods for data analysis, machine learning, and artificial intelligence have matured substantially over the past decade, at the cost of increased complexity.
 - Datasets are becoming increasingly larger and more heterogeneous
 - Hardware capabilities have matured as well, but "human hardware" has not.
-- "Human-usable" tools and software for applying said algorithms *have not* matured to any substantial degree in the last decade. Most existing tools were built to suit the needs of academic and corporate circles as far back as the 1980s.
+- "Human usable" tools and software for applying said algorithms *have not* matured to any substantial degree in the last decade. Most existing tools were built to suit the needs of academic and corporate circles as far back as the 1980s.
 - The result is a stubling-block: human time and effort required to analyze, model, and represent data has gotten worse, not better.  
 
  
@@ -46,7 +46,15 @@ Core responsibilities:
 
 The current data analysis ecosystem:
 
-- Two camps: academic and corporate 
+- Two camps: academic and corporate
+ 
+## An Example:
+ 
+In 1999 Leland Wilkinson published *A Grammar of Graphics* which codified a set of reusable patterns and idioms for
+ representing quantitative data in a visual form.
+ 
+ 
+ 
 
 # Academic
 - Matlab
@@ -54,7 +62,9 @@ The current data analysis ecosystem:
 - Spyder (Python)
 - RStudio
 
-
+# Other
+- Tonic https://tonicdev.com/home
+- Rodeo
 
 # "Interactive Python" ipython
 # RStudio

@@ -1,7 +1,141 @@
+import { send } from '../ipc'
+
 // Kernel-specific events
 // https://ipython.org/ipython-doc/3/development/messaging.html
 // https://github.com/ipython/ipython/wiki/Dev:-Javascript-Events
 //
+
+export function interrupt() {
+  return function(dispatch) {
+    dispatch({ type: 'INTERRUPTING_KERNEL' })
+
+    return send('interrupt')
+      .then(() => dispatch({ type: 'INTERRUPTED_KERNEL' }))
+      .catch(error => dispatch(errorCaught(error)))
+  }
+}
+
+export function isBusy() {
+  return { type: 'KERNEL_IS_BUSY' }
+}
+
+export function isIdle() {
+  return { type: 'KERNEL_IS_IDLE' }
+}
+
+export function kernelDetected(pythonOptions) {
+  // save over previous settings
+  if (!pythonOptions.cmd) {
+    throw new Error('Unacceptable python options without cmd that created it');
+  }
+
+  local.set('pythonOptions', pythonOptions);
+  local.set('pythonCmd', pythonOptions.cmd);
+  return { type: 'KERNEL_DETECTED', pythonOptions };
+}
+
+export function askForPythonOptions() {
+  return {
+    type: 'ASK_FOR_PYTHON_OPTIONS'
+  }
+}
+
+export function detectKernel() {
+  return function(dispatch) {
+    const pythonCmd = local.get('pythonCmd');
+    let promise;
+
+    if (pythonCmd) {
+      // verify anyway
+      promise = clientDiscovery.checkKernel({ cmd: pythonCmd })
+                               .catch(() => clientDiscovery.getFreshPythonOptions());
+    } else {
+      // get them
+      promise = clientDiscovery.getFreshPythonOptions();
+    }
+
+    return promise
+      .then(pythonOptions => dispatch(kernelDetected(pythonOptions)))
+      .catch(error => {
+        console.warn('error using detected python', error);
+
+        return dispatch(askForPythonOptions());
+      });
+  };
+}
+
+export function restart() {
+  return function(dispatch) {
+    return client.restartInstance()
+                 .then(() => dispatch({ type: 'KERNEL_RESTARTED' }))
+                 .catch(error => dispatch(errorCaught(error)));
+  };
+}
+
+function detectKernelVariables() {
+  return function(dispatch, getState) {
+    const state    = getState(),
+          terminal = _.find(state.terminals, { hasFocus: true }),
+          id       = terminal.id;
+
+    return client.getStatus().then(function(status) {
+      const variables = status.variables,
+            cwd       = status.cwd;
+
+      dispatch({ type: 'VARIABLES_CHANGED', variables, id })
+      dispatch({ type: 'WORKING_DIRECTORY_CHANGED', cwd, id })
+
+      return status;
+    }).catch(error => dispatch(errorCaught(error)));
+  };
+}
+
+export function executeActiveFileInActiveConsole() {
+  return function(dispatch, getState) {
+    const state           = getState(),
+          items           = _.head(state.editorTabGroups).items,
+          focusedAce      = state && _.find(items, { hasFocus: true }),
+          el              = focusedAce && document.querySelector('#' + focusedAce.id),
+          aceInstance     = el && ace.edit(el),
+          filename        = focusedAce.filename,
+          focusedTerminal = state && _.find(state.terminals, { hasFocus: true }),
+          id              = focusedTerminal.id,
+          content         = aceInstance && aceInstance.getSession().getValue()
+
+    if (content) {
+      dispatch({ type: 'EXECUTING', filename, id })
+
+      return client.execute(content)
+                   .then(() => dispatch({ type: 'EXECUTED', id }))
+                   .catch(error => dispatch(errorCaught(error)))
+    }
+  }
+}
+
+export function executeActiveFileSelectionInActiveConsole() {
+  return function(dispatch, getState) {
+    const state       = getState(),
+          items       = _.head(state.editorTabGroups).items,
+          focusedAce  = state && _.find(items, { hasFocus: true }),
+          el          = focusedAce && document.querySelector('#' + focusedAce.id),
+          aceInstance = el && ace.edit(el);
+
+    aceInstance.commands.exec('liftSelection', aceInstance);
+  }
+}
+
+export default {
+  askForPythonOptions,
+  detectKernel,
+  detectKernelVariables,
+  executeActiveFileInActiveConsole,
+  executeActiveFileSelectionInActiveConsole,
+  isBusy,
+  isIdle,
+  interrupt,
+  kernelDetected,
+  restart
+}
 
 
 /**
@@ -15,7 +149,7 @@
 export function connect() {
   return {
     type: 'KERNEL_CONNECT',
-    code
+          code
   }
 }
 
@@ -27,8 +161,8 @@ export function connect() {
  */
 export function shutdown(restart = false) {
   return {
-    type:    'KERNEL_SHUTDOWN',
-    restart
+    type: 'KERNEL_SHUTDOWN',
+          restart
   }
 }
 
@@ -95,7 +229,7 @@ export function shutdown(restart = false) {
 export function info(code) {
   return {
     type: 'KERNEL_INFO',
-    code
+          code
   }
 }
 
@@ -122,12 +256,15 @@ export function info(code) {
  }
 
  */
-export function execute(code,
-                        silent=false,
-                        store_history=true,
-                        user_expressions={},
-                        allow_stdin=true,
-                        stop_on_error=false) {
+export function execute(
+  code,
+  silent = false,
+  store_history = true,
+  user_expressions = {},
+  allow_stdin = true,
+  stop_on_error = false
+)
+{
   return {
     type: 'KERNEL_EXECUTE',
 
@@ -160,7 +297,7 @@ export function execute(code,
 
     // A boolean flag, which, if True, does not abort the execution queue, if an exception is encountered.
     // This allows the queued execution of multiple execute_requests, even if they generate exceptions.
-    stop_on_error,
+    stop_on_error
   }
 }
 
@@ -236,6 +373,10 @@ export function complete(code, cursor_pos) {
   }
 }
 
+export function getVariables() {
+
+}
+
 /**
  *
  response = {
@@ -246,16 +387,18 @@ export function complete(code, cursor_pos) {
   'history' : list,
   }
  */
-export function history(code,
-                        output=false,
-                        raw=true,
-                        hist_access_type='tail',
-                        start=0,
-                        stop=0,
-                        n=100,
-                        session=0,
-                        pattern="*",
-                        unique=false) {
+export function history(
+  output = false,
+  raw = true,
+  hist_access_type = 'tail',
+  start = 0,
+  stop = 0,
+  n = 100,
+  session = 0,
+  pattern = "*",
+  unique = false
+)
+{
   return {
     type: 'KERNEL_HISTORY',
 
@@ -304,6 +447,6 @@ export function history(code,
 export function completeness(code) {
   return {
     type: 'KERNEL_COMPLETENESS',
-    code
+          code
   }
 }

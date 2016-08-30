@@ -11,7 +11,7 @@
  * @returns {{type: string, ename: string, evalue: string, traceback: [string]}}
  */
 function errorOccurred(ename, evalue, traceback) {
-  return {type: 'IOPUB_ERROR_OCCURRED', ename, evalue, traceback};
+  return {type: 'IOPUB_ERROR_OCCURRED', ename, evalue, traceback}
 }
 
 /**
@@ -19,7 +19,7 @@ function errorOccurred(ename, evalue, traceback) {
  * @returns {{type: string, data: object}}
  */
 function dataDisplayed(data) {
-  return {type: 'IOPUB_DATA_DISPLAYED', data};
+  return {type: 'IOPUB_DATA_DISPLAYED', data}
 }
 
 /**
@@ -27,7 +27,7 @@ function dataDisplayed(data) {
  * @returns {{type: string, data: object}}
  */
 function resultComputed(data) {
-  return {type: 'IOPUB_RESULT_COMPUTED', data};
+  return {type: 'IOPUB_RESULT_COMPUTED', data}
 }
 
 /**
@@ -37,7 +37,7 @@ function resultComputed(data) {
  * @returns {{type: string, name: string, text: string}}
  */
 function dataStreamed(name, text) {
-  return {type: 'IOPUB_DATA_STREAMED', name, text};
+  return {type: 'IOPUB_DATA_STREAMED', name, text}
 }
 
 /**
@@ -45,7 +45,7 @@ function dataStreamed(name, text) {
  * @returns {{type: string, text: string}}
  */
 function inputExecuted(text) {
-  return {type: 'IOPUB_EXECUTED_INPUT', text};
+  return {type: 'IOPUB_EXECUTED_INPUT', text}
 }
 
 /**
@@ -53,11 +53,11 @@ function inputExecuted(text) {
  * @returns {{type: string, executionState: string}}
  */
 function stateChanged(executionState) {
-  return {type: 'IOPUB_STATE_CHANGED', executionState};
+  return {type: 'IOPUB_STATE_CHANGED', executionState}
 }
 
 function unknownEventOccurred(event) {
-  return {type: 'IOPUB_UNKNOWN_EVENT_OCCURRED', event};
+  return {type: 'IOPUB_UNKNOWN_EVENT_OCCURRED', event}
 }
 
 export default {
@@ -68,4 +68,4 @@ export default {
   inputExecuted,
   stateChanged,
   unknownEventOccurred
-};
+}

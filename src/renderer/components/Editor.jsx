@@ -13,7 +13,7 @@ import matchesoncscrollbar from 'codemirror/addon/search/matchesonscrollbar'
 import searchCursor from 'codemirror/addon/search/searchcursor'
 import match_highlighter from 'codemirror/addon/search/match-highlighter'
 
-import styles from './Editor.css'
+// import styles from './Editor.css'
 import * as editor_actions from '../actions/editor'
 
 class Editor extends Component {
@@ -82,11 +82,11 @@ class Editor extends Component {
     this.codeMirror = this.getCodeMirrorInstance().fromTextArea(this.refs.editor, editorOptions)
 
     this.codeMirror.on('change', this.onChange.bind(this))
-    this.codeMirror.on('changes', this.props.onChanges.bind(this))
+    // this.codeMirror.on('changes', this.props.onChanges.bind(this))
     this.codeMirror.on('focus', this.props.onFocus.bind(this))
     this.codeMirror.on('blur', this.props.onBlur.bind(this))
 
-    // this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
+    this.codeMirror.setValue(this.props.defaultValue || this.props.value || '')
   }
 
   componentWillReceiveProps(nextProps) {

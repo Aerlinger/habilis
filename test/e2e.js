@@ -1,8 +1,8 @@
 import { Application } from 'spectron'
 import { expect } from 'chai'
 import electronPath from 'electron-prebuilt'
-import homeStyles from '../app/components/Home.css'
-import counterStyles from '../app/components/Counter.css'
+import homeStyles from '../src/renderer/components/Home.css'
+import counterStyles from '../src/renderer/components/Counter.css'
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
@@ -12,7 +12,7 @@ describe('main window', function spec() {
   before(async () => {
     this.app = new Application({
       path: electronPath,
-      args: ['.'],
+      args: ['.']
     })
     return this.app.start()
   })
@@ -36,7 +36,8 @@ describe('main window', function spec() {
     await client.waitUntilWindowLoaded()
     await delay(500)
     const title = await browserWindow.getTitle()
-    expect(title).to.equal('Hello Electron React!')
+
+    expect(title).to.equal('Habilis Demo')
   })
 
   xit('should to Counter with click "to Counter" link', async () => {
@@ -79,7 +80,7 @@ describe('main window', function spec() {
     expect(await findCounter().getText()).to.equal('2')
   })
 
-  xit('should change if async button clicked and a second later', async () => {
+  xit('changes if async button clicked and a second later', async () => {
     const { client } = this.app
 
     const buttons = await findButtons()
@@ -89,7 +90,7 @@ describe('main window', function spec() {
     expect(await findCounter().getText()).to.equal('3')
   })
 
-  xit('should back to home if back button clicked', async () => {
+  xit('navigates back to home if back button clicked', async () => {
     const { client } = this.app
     await client.element(
       `.${counterStyles.backButton} > a`

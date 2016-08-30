@@ -2,9 +2,13 @@ import { app, BrowserWindow, Menu, shell } from 'electron'
 
 import './src/main/ipc'
 
+import { JupyterClient } from './src/main/kernel/JupyterClient'
+
 let menu
 let template
 let mainWindow = null
+
+// let client = null
 
 
 if (process.env.NODE_ENV === 'development') {
@@ -29,7 +33,13 @@ const installExtensions = async() => {
 }
 
 app.on('window-all-closed', () => {
-  app.quit()
+  /*
+  client.kill().then(function({ code, signal }) {
+    log("KILLING PID", code, signal)
+
+    app.quit()
+  })
+  */
 })
 
 app.on('ready', async() => {
@@ -41,6 +51,8 @@ app.on('ready', async() => {
     width:  1600,
     height: 1200
   })
+
+  // client = new JupyterClient()
 
   mainWindow.loadURL(`file://${__dirname}/src/renderer/app.html`)
 

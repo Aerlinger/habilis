@@ -1,9 +1,7 @@
-import { ipcMain } from 'electron'
+// import { ipcMain } from 'electron'
 
 import { JupyterClient } from './kernel/JupyterClient'
 
-let client = new JupyterClient();
-let proc = client.getChildProcess().process;
 
 function enableDebugging() {
 // CLIENT
@@ -25,7 +23,7 @@ function enableDebugging() {
   })
 
 
-// Process
+// PROCESS
 
   proc.on('close', (code, signal) => {
     console.log("PROC CLOSING:", code, signal)
@@ -98,42 +96,6 @@ function enableDebugging() {
   })
 }
 
-enableDebugging()
+// enableDebugging()
 
-ipcMain.on('run', (event, arg) => {
-  console.log("ASYNC", arg)  // prints "ping"
-  event.sender.send('asynchronous-reply', 'pong')
-})
 
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log("SYNC", arg)  // prints "ping"
-  event.returnValue = arg
-})
-
-ipcMain.on('shutdown-kernel', (event, arg) => {
-
-})
-
-ipcMain.on('run-code', (event, arg) => {
-  client.getEval(arg).then((result)=> {
-    event.sender.send('code-result', result)
-  })
-})
-
-ipcMain.on('run-code', (event, arg) => {
-  client.getEval(arg).then((result)=> {
-    event.sender.send('code-result', result)
-  })
-})
-
-ipcMain.on('get-result', (event, getResult) => {
-  client.getResult(code).then((result)=> {
-    event.sender.send('code-result', result)
-  })
-})
-
-ipcMain.on('kernel', (event, arg) => {
-  console.log("KERNEL")
-
-  event.sender.send('code-result', "KERNEL EVT RECV")
-})

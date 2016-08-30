@@ -4,13 +4,14 @@ export function onChange(value) {
           value
   }
 }
-
+/*
 export function onChanges(cm, ...changes) {
   return {
     type: "EDITOR_CHANGES",
           changes
   }
 }
+*/
 
 export function onFocus() {
   return {
